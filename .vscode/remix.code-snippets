@@ -1,0 +1,73 @@
+{
+	"loader": {
+		"prefix": "/loader",
+		"scope": "typescriptreact,javascriptreact,typescript,javascript",
+		"body": [
+			"import { type Route } from \"./+types\/${TM_FILENAME_BASE}",
+			"",
+			"export async function loader({ request }: Route.LoaderArgs) {",
+			"  return {}",
+			"}",
+		],
+	},
+	"action": {
+		"prefix": "/action",
+		"scope": "typescriptreact,javascriptreact,typescript,javascript",
+		"body": [
+			"import { type Route } from \"./+types\/${TM_FILENAME_BASE}\"",
+			"",
+			"export async function action({ request }: Route.ActionArgs) {",
+			"  return {}",
+			"}",
+		],
+	},
+	"default": {
+		"prefix": "/default",
+		"scope": "typescriptreact,javascriptreact,typescript,javascript",
+		"body": [
+			"export default function ${TM_FILENAME_BASE/[^a-zA-Z0-9]*([a-zA-Z0-9])([a-zA-Z0-9]*)/${1:/capitalize}${2}/g}({ loaderData }: Route.ComponentProps) {",
+			" const {} = loaderData",
+			" return (",
+			"  <div>",
+			"    <h1>Unknown Route</h1>",
+			"  </div>",
+			" )",
+			"}",
+		],
+	},
+	"links": {
+		"prefix": "/links",
+		"scope": "typescriptreact,javascriptreact,typescript,javascript",
+		"body": [
+			"import type { LinksFunction } from '@react-router/node'",
+			"",
+			"export const links: LinksFunction = () => {",
+			"  return []",
+			"}",
+		],
+	},
+	"meta": {
+		"prefix": "/meta",
+		"scope": "typescriptreact,javascriptreact,typescript,javascript",
+		"body": [
+			"import type { MetaFunction } from '@react-router/node'",
+			"",
+			"export const meta: MetaFunction<typeof loader> = ({ data }) => [{",
+			"  title: 'Title',",
+			"}]",
+		],
+	},
+	"shouldRevalidate": {
+		"prefix": "/shouldRevalidate",
+		"scope": "typescriptreact,javascriptreact,typescript,javascript",
+		"body": [
+			"import type { ShouldRevalidateFunction } from '@react-router/react'",
+			"",
+			"export const shouldRevalidate: ShouldRevalidateFunction = ({",
+			"  defaultShouldRevalidate",
+			"}) => {",
+			"  return defaultShouldRevalidate",
+			"}",
+		],
+	},
+}

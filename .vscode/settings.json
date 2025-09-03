@@ -1,0 +1,34 @@
+{
+	"typescript.preferences.autoImportFileExcludePatterns": [
+		"@remix-run/server-runtime",
+		"express",
+		"@radix-ui/**",
+		"@react-email/**",
+		"stream/consumers",
+		"node:stream/consumers",
+		"node:test",
+		"node:console",
+		"@headlessui/react",
+		"react-day-picker",
+		"console",
+		"#node_modules"
+	],
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "explicit"
+		// "source.fixAll.eslint": "explicit"
+	},
+	"workbench.editorAssociations": {
+		"*.db": "sqlite-viewer.view"
+	},
+	"eslint.useFlatConfig": true,
+	"editor.formatOnSave": true,
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"remix-forge.componentFolder": "/app/components/ui",
+	"testing.automaticallyOpenPeekView": "never",
+	"editor.defaultFormatter": "biomejs.biome"
+}

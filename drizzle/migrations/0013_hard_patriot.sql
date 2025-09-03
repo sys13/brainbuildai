@@ -1,0 +1,1 @@
+ALTER TABLE "feature" ALTER COLUMN "prd_id" SET NOT NULL;

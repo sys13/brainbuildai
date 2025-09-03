@@ -1,0 +1,78 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"files": {
+		"ignore": [
+			".react-router/*",
+			"coverage*",
+			"lib",
+			"node_modules",
+			"pnpm-lock.yaml",
+			"**/*.snap",
+			"build",
+			"server-build",
+			"test-results",
+			"playwright-report",
+			"app/components/ui/icons/name.d.ts",
+			".vscode/remix.code-snippets"
+		],
+		"ignoreUnknown": false
+	},
+	"formatter": {
+		"attributePosition": "auto",
+		"bracketSpacing": true,
+		"enabled": true,
+		"formatWithErrors": false,
+		"ignore": [
+			"**/node_modules",
+			"./build",
+			"./public/build",
+			"./server-build",
+			"**/.env",
+			"./test-results/",
+			"./playwright-report/",
+			"./playwright/.cache/",
+			"./tests/fixtures/email/*.json",
+			"./coverage",
+			"./drizzle/migrations",
+			"**/package-lock.json",
+			".vscode/remix.code-snippets"
+		],
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineEnding": "lf",
+		"lineWidth": 80,
+		"useEditorconfig": true
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"semicolons": "asNeeded",
+			"trailingCommas": "all"
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": { "recommended": true },
+		"ignore": [
+			".react-router/*",
+			"coverage*",
+			"lib",
+			"node_modules",
+			"pnpm-lock.yaml",
+			"**/*.snap",
+			"build",
+			"server-build",
+			"test-results",
+			"playwright-report",
+			"app/components/ui/icons/name.d.ts"
+		]
+	},
+	"organizeImports": { "enabled": true },
+	"overrides": [{ "include": [".nvmrc"] }, { "include": [".nvmrc"] }],
+	"vcs": {
+		"clientKind": "git",
+		"defaultBranch": "main",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
+}

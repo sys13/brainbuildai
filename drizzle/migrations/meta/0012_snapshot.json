@@ -1,0 +1,3653 @@
+{
+	"id": "c8da94be-20a6-4c01-bed9-84071d536f83",
+	"prevId": "28c18b39-063b-4e71-8d35-d76fd3cb5acb",
+	"version": "7",
+	"dialect": "postgresql",
+	"tables": {
+		"public.connection": {
+			"name": "connection",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"providerId": {
+					"name": "providerId",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"providerName": {
+					"name": "providerName",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"connection_tenant_id_providerName_providerId_index": {
+					"name": "connection_tenant_id_providerName_providerId_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "providerName",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "providerId",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"connection_tenant_id_tenant_id_fk": {
+					"name": "connection_tenant_id_tenant_id_fk",
+					"tableFrom": "connection",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"connection_user_id_user_id_fk": {
+					"name": "connection_user_id_user_id_fk",
+					"tableFrom": "connection",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.password": {
+			"name": "password",
+			"schema": "",
+			"columns": {
+				"hash": {
+					"name": "hash",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"password_tenant_id_user_id_index": {
+					"name": "password_tenant_id_user_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "user_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"password_tenant_id_tenant_id_fk": {
+					"name": "password_tenant_id_tenant_id_fk",
+					"tableFrom": "password",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"password_user_id_user_id_fk": {
+					"name": "password_user_id_user_id_fk",
+					"tableFrom": "password",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.session": {
+			"name": "session",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"expiration_date": {
+					"name": "expiration_date",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"session_tenant_id_user_id_index": {
+					"name": "session_tenant_id_user_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "user_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"session_tenant_id_tenant_id_fk": {
+					"name": "session_tenant_id_tenant_id_fk",
+					"tableFrom": "session",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"session_user_id_user_id_fk": {
+					"name": "session_user_id_user_id_fk",
+					"tableFrom": "session",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.verification": {
+			"name": "verification",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"algorithm": {
+					"name": "algorithm",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"charSet": {
+					"name": "charSet",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"digits": {
+					"name": "digits",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"expiresAt": {
+					"name": "expiresAt",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"internal": {
+					"name": "internal",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": false
+				},
+				"period": {
+					"name": "period",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"secret": {
+					"name": "secret",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"target": {
+					"name": "target",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"type": {
+					"name": "type",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"what_to_build": {
+					"name": "what_to_build",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"verification_target_type_index": {
+					"name": "verification_target_type_index",
+					"columns": [
+						{
+							"expression": "target",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "type",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"verification_tenant_id_tenant_id_fk": {
+					"name": "verification_tenant_id_tenant_id_fk",
+					"tableFrom": "verification",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.tenant": {
+			"name": "tenant",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"completed_onboarding": {
+					"name": "completed_onboarding",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"hostname": {
+					"name": "hostname",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"initial_email": {
+					"name": "initial_email",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"stripe_customer_id": {
+					"name": "stripe_customer_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"tier": {
+					"name": "tier",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"what_to_build": {
+					"name": "what_to_build",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"company_website": {
+					"name": "company_website",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "''"
+				},
+				"description": {
+					"name": "description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.user": {
+			"name": "user",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"email": {
+					"name": "email",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"username": {
+					"name": "username",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"internal": {
+					"name": "internal",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"marketing_emails": {
+					"name": "marketing_emails",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"user_email_key": {
+					"name": "user_email_key",
+					"columns": [
+						{
+							"expression": "email",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"user_tenantIdKey": {
+					"name": "user_tenantIdKey",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"user_username_key": {
+					"name": "user_username_key",
+					"columns": [
+						{
+							"expression": "username",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"user_tenant_id_tenant_id_fk": {
+					"name": "user_tenant_id_tenant_id_fk",
+					"tableFrom": "user",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.post": {
+			"name": "post",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"content": {
+					"name": "content",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"featured_image": {
+					"name": "featured_image",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"meta_description": {
+					"name": "meta_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"meta_keywords": {
+					"name": "meta_keywords",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"meta_title": {
+					"name": "meta_title",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"published_at": {
+					"name": "published_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"slug": {
+					"name": "slug",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.context": {
+			"name": "context",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"text_dump": {
+					"name": "text_dump",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"website": {
+					"name": "website",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"context_tenant_id_id_index": {
+					"name": "context_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"context_tenant_id_tenant_id_fk": {
+					"name": "context_tenant_id_tenant_id_fk",
+					"tableFrom": "context",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"context_prd_id_prd_id_fk": {
+					"name": "context_prd_id_prd_id_fk",
+					"tableFrom": "context",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"context_prdId_unique": {
+					"name": "context_prdId_unique",
+					"nullsNotDistinct": false,
+					"columns": ["prd_id"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.design_image": {
+			"name": "design_image",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"image_url": {
+					"name": "image_url",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"design_image_tenant_id_id_index": {
+					"name": "design_image_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"design_image_tenant_id_tenant_id_fk": {
+					"name": "design_image_tenant_id_tenant_id_fk",
+					"tableFrom": "design_image",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"design_image_prd_id_prd_id_fk": {
+					"name": "design_image_prd_id_prd_id_fk",
+					"tableFrom": "design_image",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.design_link": {
+			"name": "design_link",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"url": {
+					"name": "url",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"design_link_tenant_id_id_index": {
+					"name": "design_link_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"design_link_tenant_id_tenant_id_fk": {
+					"name": "design_link_tenant_id_tenant_id_fk",
+					"tableFrom": "design_link",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"design_link_prd_id_prd_id_fk": {
+					"name": "design_link_prd_id_prd_id_fk",
+					"tableFrom": "design_link",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.event": {
+			"name": "event",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"details": {
+					"name": "details",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"event_tenant_id_id_index": {
+					"name": "event_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"event_prd_id_prd_id_fk": {
+					"name": "event_prd_id_prd_id_fk",
+					"tableFrom": "event",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"event_tenant_id_tenant_id_fk": {
+					"name": "event_tenant_id_tenant_id_fk",
+					"tableFrom": "event",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"event_user_id_user_id_fk": {
+					"name": "event_user_id_user_id_fk",
+					"tableFrom": "event",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.exec_summary": {
+			"name": "exec_summary",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"text_dump": {
+					"name": "text_dump",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"website": {
+					"name": "website",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"exec_summary_tenant_id_id_index": {
+					"name": "exec_summary_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"exec_summary_tenant_id_tenant_id_fk": {
+					"name": "exec_summary_tenant_id_tenant_id_fk",
+					"tableFrom": "exec_summary",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"exec_summary_prd_id_prd_id_fk": {
+					"name": "exec_summary_prd_id_prd_id_fk",
+					"tableFrom": "exec_summary",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"exec_summary_prdId_unique": {
+					"name": "exec_summary_prdId_unique",
+					"nullsNotDistinct": false,
+					"columns": ["prd_id"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.feature": {
+			"name": "feature",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"feature_tenant_id_id_index": {
+					"name": "feature_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"feature_tenant_id_tenant_id_fk": {
+					"name": "feature_tenant_id_tenant_id_fk",
+					"tableFrom": "feature",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"feature_prd_id_prd_id_fk": {
+					"name": "feature_prd_id_prd_id_fk",
+					"tableFrom": "feature",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.goal": {
+			"name": "goal",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"goal_tenant_id_id_index": {
+					"name": "goal_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"goal_tenant_id_tenant_id_fk": {
+					"name": "goal_tenant_id_tenant_id_fk",
+					"tableFrom": "goal",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"goal_prd_id_prd_id_fk": {
+					"name": "goal_prd_id_prd_id_fk",
+					"tableFrom": "goal",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.job": {
+			"name": "job",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"job_type": {
+					"name": "job_type",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"data": {
+					"name": "data",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"job_tenant_id_id_index": {
+					"name": "job_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"job_tenant_id_tenant_id_fk": {
+					"name": "job_tenant_id_tenant_id_fk",
+					"tableFrom": "job",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.permission": {
+			"name": "permission",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"persona_id": {
+					"name": "persona_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"privilege": {
+					"name": "privilege",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"special_principal": {
+					"name": "special_principal",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"permission_tenant_id_id_index": {
+					"name": "permission_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"permission_tenant_id_tenant_id_fk": {
+					"name": "permission_tenant_id_tenant_id_fk",
+					"tableFrom": "permission",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"permission_persona_id_persona_id_fk": {
+					"name": "permission_persona_id_persona_id_fk",
+					"tableFrom": "permission",
+					"tableTo": "persona",
+					"columnsFrom": ["persona_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"permission_prd_id_prd_id_fk": {
+					"name": "permission_prd_id_prd_id_fk",
+					"tableFrom": "permission",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"permission_user_id_user_id_fk": {
+					"name": "permission_user_id_user_id_fk",
+					"tableFrom": "permission",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.persona": {
+			"name": "persona",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"persona_tenant_id_id_index": {
+					"name": "persona_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"persona_tenant_id_tenant_id_fk": {
+					"name": "persona_tenant_id_tenant_id_fk",
+					"tableFrom": "persona",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.prd": {
+			"name": "prd",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"owner_id": {
+					"name": "owner_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"prd_tenant_id_id_index": {
+					"name": "prd_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"prd_tenant_id_tenant_id_fk": {
+					"name": "prd_tenant_id_tenant_id_fk",
+					"tableFrom": "prd",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"prd_owner_id_user_id_fk": {
+					"name": "prd_owner_id_user_id_fk",
+					"tableFrom": "prd",
+					"tableTo": "user",
+					"columnsFrom": ["owner_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.prd_user_interview": {
+			"name": "prd_user_interview",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"user_interview_id": {
+					"name": "user_interview_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"prd_user_interview_tenant_id_id_index": {
+					"name": "prd_user_interview_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"prd_user_interview_tenant_id_tenant_id_fk": {
+					"name": "prd_user_interview_tenant_id_tenant_id_fk",
+					"tableFrom": "prd_user_interview",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"prd_user_interview_prd_id_prd_id_fk": {
+					"name": "prd_user_interview_prd_id_prd_id_fk",
+					"tableFrom": "prd_user_interview",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"prd_user_interview_user_interview_id_user_interview_id_fk": {
+					"name": "prd_user_interview_user_interview_id_user_interview_id_fk",
+					"tableFrom": "prd_user_interview",
+					"tableTo": "user_interview",
+					"columnsFrom": ["user_interview_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.prd_persona": {
+			"name": "prd_persona",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"persona_id": {
+					"name": "persona_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"prd_persona_tenant_id_id_index": {
+					"name": "prd_persona_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"prd_persona_tenant_id_tenant_id_fk": {
+					"name": "prd_persona_tenant_id_tenant_id_fk",
+					"tableFrom": "prd_persona",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"prd_persona_persona_id_persona_id_fk": {
+					"name": "prd_persona_persona_id_persona_id_fk",
+					"tableFrom": "prd_persona",
+					"tableTo": "persona",
+					"columnsFrom": ["persona_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"prd_persona_prd_id_prd_id_fk": {
+					"name": "prd_persona_prd_id_prd_id_fk",
+					"tableFrom": "prd_persona",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.problem": {
+			"name": "problem",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"problem_tenant_id_id_index": {
+					"name": "problem_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"problem_tenant_id_tenant_id_fk": {
+					"name": "problem_tenant_id_tenant_id_fk",
+					"tableFrom": "problem",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"problem_prd_id_prd_id_fk": {
+					"name": "problem_prd_id_prd_id_fk",
+					"tableFrom": "problem",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.product": {
+			"name": "product",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"product_tenant_id_id_index": {
+					"name": "product_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"product_tenant_id_tenant_id_fk": {
+					"name": "product_tenant_id_tenant_id_fk",
+					"tableFrom": "product",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.risk": {
+			"name": "risk",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"risk_tenant_id_id_index": {
+					"name": "risk_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"risk_tenant_id_tenant_id_fk": {
+					"name": "risk_tenant_id_tenant_id_fk",
+					"tableFrom": "risk",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"risk_prd_id_prd_id_fk": {
+					"name": "risk_prd_id_prd_id_fk",
+					"tableFrom": "risk",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.role": {
+			"name": "role",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"internal": {
+					"name": "internal",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"role_tenant_id_name_index": {
+					"name": "role_tenant_id_name_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "name",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"role_tenant_id_tenant_id_fk": {
+					"name": "role_tenant_id_tenant_id_fk",
+					"tableFrom": "role",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.user_to_role": {
+			"name": "user_to_role",
+			"schema": "",
+			"columns": {
+				"role_id": {
+					"name": "role_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"user_to_role_role_id_role_id_fk": {
+					"name": "user_to_role_role_id_role_id_fk",
+					"tableFrom": "user_to_role",
+					"tableTo": "role",
+					"columnsFrom": ["role_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"user_to_role_tenant_id_tenant_id_fk": {
+					"name": "user_to_role_tenant_id_tenant_id_fk",
+					"tableFrom": "user_to_role",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"user_to_role_user_id_user_id_fk": {
+					"name": "user_to_role_user_id_user_id_fk",
+					"tableFrom": "user_to_role",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {
+				"user_to_role_tenant_id_user_id_role_id_pk": {
+					"name": "user_to_role_tenant_id_user_id_role_id_pk",
+					"columns": ["tenant_id", "user_id", "role_id"]
+				}
+			},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.share": {
+			"name": "share",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"share_by": {
+					"name": "share_by",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'none'"
+				},
+				"share_permission": {
+					"name": "share_permission",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'reader'"
+				},
+				"share_domain": {
+					"name": "share_domain",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"share_tenant_id_id_index": {
+					"name": "share_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"share_tenant_id_tenant_id_fk": {
+					"name": "share_tenant_id_tenant_id_fk",
+					"tableFrom": "share",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"share_prd_id_prd_id_fk": {
+					"name": "share_prd_id_prd_id_fk",
+					"tableFrom": "share",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.share_email": {
+			"name": "share_email",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"email": {
+					"name": "email",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"share_permission": {
+					"name": "share_permission",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'reader'"
+				}
+			},
+			"indexes": {
+				"share_email_tenant_id_id_index": {
+					"name": "share_email_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"share_email_tenant_id_tenant_id_fk": {
+					"name": "share_email_tenant_id_tenant_id_fk",
+					"tableFrom": "share_email",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"share_email_prd_id_prd_id_fk": {
+					"name": "share_email_prd_id_prd_id_fk",
+					"tableFrom": "share_email",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.story": {
+			"name": "story",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"story_tenant_id_id_index": {
+					"name": "story_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"story_tenant_id_tenant_id_fk": {
+					"name": "story_tenant_id_tenant_id_fk",
+					"tableFrom": "story",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"story_prd_id_prd_id_fk": {
+					"name": "story_prd_id_prd_id_fk",
+					"tableFrom": "story",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.success_criteria": {
+			"name": "success_criteria",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"success_criteria_tenant_id_id_index": {
+					"name": "success_criteria_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"success_criteria_tenant_id_tenant_id_fk": {
+					"name": "success_criteria_tenant_id_tenant_id_fk",
+					"tableFrom": "success_criteria",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"success_criteria_prd_id_prd_id_fk": {
+					"name": "success_criteria_prd_id_prd_id_fk",
+					"tableFrom": "success_criteria",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.summary": {
+			"name": "summary",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"prd_id": {
+					"name": "prd_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"text_dump": {
+					"name": "text_dump",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"website": {
+					"name": "website",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"summary_tenant_id_id_index": {
+					"name": "summary_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"summary_tenant_id_tenant_id_fk": {
+					"name": "summary_tenant_id_tenant_id_fk",
+					"tableFrom": "summary",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"summary_prd_id_prd_id_fk": {
+					"name": "summary_prd_id_prd_id_fk",
+					"tableFrom": "summary",
+					"tableTo": "prd",
+					"columnsFrom": ["prd_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"summary_prdId_unique": {
+					"name": "summary_prdId_unique",
+					"nullsNotDistinct": false,
+					"columns": ["prd_id"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.user_image": {
+			"name": "user_image",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"alt_text": {
+					"name": "alt_text",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"blob": {
+					"name": "blob",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"content_type": {
+					"name": "content_type",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"user_image_tenant_id_user_id_index": {
+					"name": "user_image_tenant_id_user_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "user_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"user_image_tenant_id_tenant_id_fk": {
+					"name": "user_image_tenant_id_tenant_id_fk",
+					"tableFrom": "user_image",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				},
+				"user_image_user_id_user_id_fk": {
+					"name": "user_image_user_id_user_id_fk",
+					"tableFrom": "user_image",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.user_interview": {
+			"name": "user_interview",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"is_accepted": {
+					"name": "is_accepted",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_added_manually": {
+					"name": "is_added_manually",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_suggested": {
+					"name": "is_suggested",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"default": true
+				},
+				"priority": {
+					"name": "priority",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"suggested_description": {
+					"name": "suggested_description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"vector_text": {
+					"name": "vector_text",
+					"type": "tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"customer": {
+					"name": "customer",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"user_interview_tenant_id_id_index": {
+					"name": "user_interview_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"user_interview_tenant_id_tenant_id_fk": {
+					"name": "user_interview_tenant_id_tenant_id_fk",
+					"tableFrom": "user_interview",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.user_login": {
+			"name": "user_login",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "varchar",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"tenant_id": {
+					"name": "tenant_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"date": {
+					"name": "date",
+					"type": "date",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"num_logins": {
+					"name": "num_logins",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {
+				"user_login_tenant_id_id_index": {
+					"name": "user_login_tenant_id_id_index",
+					"columns": [
+						{
+							"expression": "tenant_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": true,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {
+				"user_login_tenant_id_tenant_id_fk": {
+					"name": "user_login_tenant_id_tenant_id_fk",
+					"tableFrom": "user_login",
+					"tableTo": "tenant",
+					"columnsFrom": ["tenant_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "cascade"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		}
+	},
+	"enums": {},
+	"schemas": {},
+	"sequences": {},
+	"roles": {},
+	"policies": {},
+	"views": {},
+	"_meta": {
+		"columns": {},
+		"schemas": {},
+		"tables": {}
+	}
+}

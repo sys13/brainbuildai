@@ -1,0 +1,1 @@
+ALTER TABLE "ticket" ALTER COLUMN "description" SET DATA TYPE text;

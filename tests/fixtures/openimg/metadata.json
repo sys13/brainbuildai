@@ -1,0 +1,50 @@
+{
+	"./tests/fixtures/openimg/brainbuildai-bucket-fly-storage-tigris-dev/designs/pz93qr6ogy2qttplo8ngrtd3/1746691719144-b00501be-c17f-474c-b904-efd4612bdc28-png-w-256-h-256-fit-base.avif": {
+		"size": 4159,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/brainbuildai-bucket-fly-storage-tigris-dev/designs/pz93qr6ogy2qttplo8ngrtd3/1746700067285-7293de6a-0a44-4e75-adf0-f2cef35b6289-png-w-256-h-256-fit-base.avif": {
+		"size": 6723,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/brainbuildai-bucket-fly-storage-tigris-dev/designs/quq4b8vxpo0dqw66k34vpk2k/1746706977090-6688def0-ea4e-400d-b158-1c7931edd9f8-png-w-256-h-256-fit-base.avif": {
+		"size": 8268,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/brainbuildai-bucket-fly-storage-tigris-dev/designs/quq4b8vxpo0dqw66k34vpk2k/1746707030887-a446cbc7-50c5-4ecf-ab74-86f800b407fc-png-w-256-h-256-fit-base.avif": {
+		"size": 4159,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/storage-all-brainbuildai-com-fly-storage-tigris-dev/designs/quq4b8vxpo0dqw66k34vpk2k/1746709452409-2bbac4aa-d7fe-468f-b6a3-78c05438de7f-png-w-256-h-256-fit-base.avif": {
+		"size": 3128,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/storage-all-brainbuildai-com-fly-storage-tigris-dev/designs/ygcrpyky7kt4yhbqbij09xks/1748590994670-1044947e-79a5-4f3a-a6a4-05d2706a409b-png-w-256-h-256-fit-base.avif": {
+		"size": 1376,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/storage-all-brainbuildai-com-fly-storage-tigris-dev/designs/ep1mv38ooz3w7subre1eriai/1749554902251-36049b27-06a1-4cdf-8f7d-c36287589ece-png-w-256-h-256-fit-base.avif": {
+		"size": 6895,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/public/img/file-upload-svg-w-256-h-256-fit-base.avif": {
+		"size": 2560,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/public/img/file-upload-svg-w-80-h-80-fit-base.avif": {
+		"size": 1097,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/public/img/file-upload-svg-w-50-h-50-fit-base.avif": {
+		"size": 1080,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/public/img/jpg-icon-png-w-50-h-50-fit-base.avif": {
+		"size": 813,
+		"contentType": "image/avif"
+	},
+	"./tests/fixtures/openimg/public/img/jpg-icon-png-w-35-h-35-fit-base.avif": {
+		"size": 858,
+		"contentType": "image/avif"
+	}
+}

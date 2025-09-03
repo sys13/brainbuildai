@@ -1,0 +1,248 @@
+concurrency:
+  cancel-in-progress: true
+
+  group: ${{ github.workflow }}-${{ github.ref }}
+jobs:
+  container:
+    name: 📦 Prepare Container
+    runs-on: ubuntu-24.04
+    # only prepare container on pushes
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.2.0
+        id: app_name
+        with:
+          file: 'fly.toml'
+          field: 'app'
+
+      - name: 🎈 Setup Fly
+        uses: superfly/flyctl-actions/setup-flyctl@1.5
+
+      - name: 📦 Build Staging Container
+        if: ${{ github.ref == 'refs/heads/dev' }}
+        run: |
+          flyctl deploy \
+            --build-only \
+            --push \
+            --image-label ${{ github.sha }} \
+            --build-arg COMMIT_SHA=${{ github.sha }} \
+            --app ${{ steps.app_name.outputs.value }}-staging
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: 📦 Build Production Container
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          flyctl deploy \
+            --build-only \
+            --push \
+            --image-label ${{ github.sha }} \
+            --build-arg COMMIT_SHA=${{ github.sha }} \
+            --app ${{ steps.app_name.outputs.value }}
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  deploy:
+    # only build/deploy branches on pushes
+    if: ${{ github.event_name == 'push' }}
+
+    name: 🚀 Deploy
+    needs: [lint, migrate, playwright, typecheck, vitest, container]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - id: app_name
+        name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.2.0
+        with:
+          field: 'app'
+
+          file: 'fly.toml'
+      - name: 🎈 Setup Fly
+        uses: superfly/flyctl-actions/setup-flyctl@1.5
+
+      - env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        if: ${{ github.ref == 'refs/heads/main' }}
+        name: 🚀 Deploy Production
+        run: |
+          IMAGE="registry.fly.io/${{ steps.app_name.outputs.value }}:${{ github.sha }}"
+          flyctl deploy --image $IMAGE
+  lint:
+    name: ⬣ Lint
+    runs-on: ubuntu-22.04
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: 22.5.1
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🔬 Lint
+        run: npm run lint
+
+  migrate:
+    name: 📂 Migrate
+    needs: [lint, typecheck]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: 22.5.1
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🐘 Get Neon preview DB URL
+        if: ${{ github.event_name == 'pull_request' }}
+        id: neon
+        uses: neondatabase/create-branch-action@v6
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          api_key:    ${{ secrets.NEON_API_KEY }}
+          branch_name: preview/pr-${{ github.event.pull_request.number }}-${{ github.head_ref }}
+          database: neondb
+          role: neondb_owner
+
+      - env:
+          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler || secrets.DATABASE_URL }}
+
+        name: 📂 Migrate
+        run: npm run db:migrate
+  playwright:
+    name: 🎭 Playwright
+    needs: [lint, migrate, typecheck]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🏄 Copy test env vars
+        run: cp .env.example .env
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: 22.5.1
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🐘 Get Neon preview DB URL
+        if: ${{ github.event_name == 'pull_request' }}
+        id: neon
+        uses: neondatabase/create-branch-action@v6
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          api_key:    ${{ secrets.NEON_API_KEY }}
+          branch_name: preview/pr-${{ github.event.pull_request.number }}-${{ github.head_ref }}
+          database: neondb
+          role: neondb_owner
+
+      - name: 📥 Install Playwright Browsers
+        run: npm run test:e2e:install
+
+      - name: 🏗 Build
+        run: npm run build
+
+      - env:
+          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler || secrets.DATABASE_URL }}
+          MOCK_AI: true
+
+        name: 🎭 Playwright tests
+        run: npx playwright test
+      - if: always()
+        name: 📊 Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+    timeout-minutes: 60
+  typecheck:
+    name: ʦ TypeScript
+    runs-on: ubuntu-22.04
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: 22.5.1
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🔎 Type check
+        run: npm run typecheck --if-present
+
+  vitest:
+    name: ⚡ Vitest
+    needs: [lint, migrate, typecheck]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: 22.5.1
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🏄 Copy test env vars
+        run: cp .env.example .env
+
+      - name: 🐘 Get Neon preview DB URL
+        if: ${{ github.event_name == 'pull_request' }}
+        id: neon
+        uses: neondatabase/create-branch-action@v6
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          api_key:    ${{ secrets.NEON_API_KEY }}
+          branch_name: preview/pr-${{ github.event.pull_request.number }}-${{ github.head_ref }}
+          database: neondb
+          role: neondb_owner
+
+      - env:
+          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler || secrets.DATABASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+        name: ⚡ Run vitest
+        run: npm run test -- --coverage
+name: 🚀 Deploy
+on:
+  pull_request: {}
+
+  push:
+    branches:
+      - anand
+      - dev
+      - main
+permissions:
+  actions: write
+  contents: read

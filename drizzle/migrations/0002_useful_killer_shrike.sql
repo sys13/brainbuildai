@@ -1,0 +1,1 @@
+ALTER TABLE "context" ADD CONSTRAINT "context_prdId_unique" UNIQUE("prd_id");

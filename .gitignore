@@ -1,0 +1,27 @@
+node_modules
+.DS_store
+
+/build
+/server-build
+/server-build-temp
+.env
+.cache
+
+/tests/prisma
+
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/tests/fixtures/email/
+/coverage
+
+/public/uploads/
+
+/other/cache.db
+
+# Easy way to create temporary files/folders that won't accidentally be added to git
+*.local.*
+
+.brainbuild
+.react-router/
+server-build-temp

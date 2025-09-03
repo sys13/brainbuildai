@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json.schemastore.org/prettierrc",
+	"singleQuote": true,
+	"useTabs": true,
+	"semi": false,
+	"overrides": [
+		{
+			"files": "*.html"
+		},
+		{
+			"files": ["*.yml", "*.yaml", ".nvmrc"],
+			"options": { "parser": "yaml" }
+		},
+		{
+			"files": ["*.md", "*.mdx"]
+		}
+	]
+}

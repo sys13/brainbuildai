@@ -1,0 +1,2 @@
+ALTER TABLE "integration_config" ALTER COLUMN "tenant_id" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "integration_config" ADD CONSTRAINT "integration_config_tenant_id_tenant_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenant"("id") ON DELETE cascade ON UPDATE cascade;

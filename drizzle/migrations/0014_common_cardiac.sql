@@ -1,0 +1,2 @@
+ALTER TABLE "permission" ADD COLUMN "user_interview_id" varchar;--> statement-breakpoint
+ALTER TABLE "permission" ADD CONSTRAINT "permission_user_interview_id_prd_id_fk" FOREIGN KEY ("user_interview_id") REFERENCES "public"."prd"("id") ON DELETE cascade ON UPDATE cascade;

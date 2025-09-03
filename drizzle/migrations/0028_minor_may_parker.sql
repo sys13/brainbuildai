@@ -1,0 +1,1 @@
+ALTER TABLE "context" ADD COLUMN "auto_accept" boolean DEFAULT false;

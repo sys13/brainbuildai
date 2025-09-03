@@ -1,0 +1,2 @@
+ALTER TABLE "goal" ADD COLUMN "prd_id" varchar NOT NULL;--> statement-breakpoint
+ALTER TABLE "goal" ADD CONSTRAINT "goal_prd_id_prd_id_fk" FOREIGN KEY ("prd_id") REFERENCES "public"."prd"("id") ON DELETE cascade ON UPDATE cascade;

@@ -1,0 +1,1 @@
+ALTER TABLE "context" ADD COLUMN "system_prompt" text;

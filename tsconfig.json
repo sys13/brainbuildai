@@ -1,0 +1,26 @@
+{
+	"include": ["**/env.d.ts", "**/*.ts", "**/*.tsx"],
+	"compilerOptions": {
+		"rootDirs": [".", "./.react-router/types"],
+		"types": ["@react-router/node", "vite/client"],
+		"skipLibCheck": true,
+		"module": "preserve",
+		"moduleResolution": "Bundler",
+		"lib": ["DOM", "DOM.Iterable", "ES2022"],
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"target": "ES2022",
+		"resolveJsonModule": true,
+		"strict": true,
+		"noImplicitAny": true,
+		"allowJs": true,
+		"forceConsistentCasingInFileNames": true,
+		"paths": {
+			"#app/*": ["./app/*"],
+			"#db/*": ["./db/*"],
+			"#tests/*": ["./tests/*"],
+			"@/icon-name": ["./app/components/ui/icons/types.ts", "./types/types.ts"]
+		},
+		"noEmit": true
+	}
+}

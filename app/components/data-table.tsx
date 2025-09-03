@@ -1,0 +1,93 @@
+import {
+	type ColumnDef,
+	flexRender,
+	getCoreRowModel,
+	useReactTable,
+} from '@tanstack/react-table'
+
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from './ui/table'
+
+interface DataTableProps<TData, TValue> {
+	columns: ColumnDef<TData, TValue>[]
+	data: TData[]
+}
+
+export function DataTable<TData, TValue>({
+	columns,
+	data,
+	inPlaceAdd,
+	showHeader = true,
+}: DataTableProps<TData, TValue> & {
+	inPlaceAdd?: React.ReactNode
+	showHeader?: boolean
+}) {
+	const table = useReactTable({
+		columns,
+		data,
+		getCoreRowModel: getCoreRowModel(),
+	})
+
+	return (
+		<div className="rounded-md border">
+			<Table>
+				{showHeader ? (
+					<TableHeader>
+						{table.getHeaderGroups().map((headerGroup) => (
+							<TableRow key={headerGroup.id}>
+								{headerGroup.headers.map((header) => {
+									return (
+										<TableHead key={header.id}>
+											{header.isPlaceholder
+												? null
+												: flexRender(
+														header.column.columnDef.header,
+														header.getContext(),
+													)}
+										</TableHead>
+									)
+								})}
+							</TableRow>
+						))}
+					</TableHeader>
+				) : null}
+
+				<TableBody>
+					{inPlaceAdd && (
+						<TableRow className="p-0 hover:bg-transparent">
+							<TableCell className="p-0" colSpan={columns.length}>
+								{inPlaceAdd}
+							</TableCell>
+						</TableRow>
+					)}
+					{table.getRowModel().rows.length ? (
+						table.getRowModel().rows.map((row) => (
+							<TableRow
+								data-state={row.getIsSelected() && 'selected'}
+								key={row.id}
+							>
+								{row.getVisibleCells().map((cell) => (
+									<TableCell key={cell.id}>
+										{flexRender(cell.column.columnDef.cell, cell.getContext())}
+									</TableCell>
+								))}
+							</TableRow>
+						))
+					) : !inPlaceAdd ? (
+						<TableRow>
+							<TableCell className="h-24 text-center" colSpan={columns.length}>
+								No results.
+							</TableCell>
+						</TableRow>
+					) : null}
+				</TableBody>
+			</Table>
+		</div>
+	)
+}
