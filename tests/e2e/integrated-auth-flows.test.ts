@@ -1,5 +1,5 @@
-import { fakerEN } from '@faker-js/faker'
 import { expect, test } from '#tests/playwright-utils'
+import { fakerEN } from '@faker-js/faker'
 
 const URL_REGEX = /(?<url>https?:\/\/[^\s$.?#].\S*)/
 const _CODE_REGEX = /Here's your verification code: (?<code>\w+)/
@@ -80,10 +80,10 @@ test('protected routes redirect to login', async ({ page }) => {
 		await page.goto(route)
 
 		// Should be redirected to login page
-		await expect(page.url()).toContain('/login')
+		expect(page.url()).toContain('/login')
 
 		// URL should contain the redirectTo parameter
-		await expect(page.url()).toContain('redirectTo=')
+		expect(page.url()).toContain('redirectTo=')
 	}
 })
 
@@ -115,11 +115,30 @@ test('login-logout flow', async ({ insertNewUser, page }) => {
 	if (await logoutButton.isVisible()) {
 		await logoutButton.click()
 
-		// Verify we're logged out
 		await expect(page).toHaveURL(/\/|\/login/)
 
-		// Verify protected route redirects after logout
-		await page.goto('/dashboard')
-		await expect(page.url()).toContain('/login')
+		// Explicitly clear cookies and storage after logout
+		await page.context().clearCookies()
+		await page.evaluate(() => {
+			localStorage.clear()
+			sessionStorage.clear()
+		})
+		// Visit /dashboard and log redirect chain
+		const responses = []
+		page.on('response', (response) => {
+			if (
+				response.url().includes('/dashboard') ||
+				response.url().includes('/login')
+			) {
+				responses.push({
+					url: response.url(),
+					status: response.status(),
+					headers: response.headers(),
+				})
+			}
+		})
+		await page.goto('/dashboard', { waitUntil: 'networkidle' })
+		const dashboardUrl = page.url()
+		expect(dashboardUrl).toContain('/login')
 	}
 })

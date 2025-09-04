@@ -199,6 +199,7 @@ function getLoginRedirect(
 	const loginRedirect = ['/login', loginParams?.toString()]
 		.filter(Boolean)
 		.join('?')
+	console.log('[getLoginRedirect] redirecting to:', loginRedirect)
 	return loginRedirect
 }
 
@@ -284,7 +285,12 @@ export async function requireSuperAdminUser(
 export async function requireAnonymous(request: Request) {
 	const user = await getUser(request)
 	if (user) {
+		console.log(
+			'[requireAnonymous] redirecting authenticated user from /login to /',
+		)
 		throw redirect('/')
+	} else {
+		console.log('[requireAnonymous] no user, allowing access to /login')
 	}
 }
 
