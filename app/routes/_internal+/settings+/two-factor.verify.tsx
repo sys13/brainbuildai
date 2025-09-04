@@ -80,7 +80,7 @@ export async function action({ request }: ActionFunctionArgs) {
 		schema: () =>
 			ActionSchema.superRefine(async (data, ctx) => {
 				if (data.intent === 'cancel') {
-					return null
+					return
 				}
 				const codeIsValid = await isCodeValid({
 					code: data.code,
@@ -93,7 +93,6 @@ export async function action({ request }: ActionFunctionArgs) {
 						message: 'Invalid code',
 						path: ['code'],
 					})
-					return z.NEVER
 				}
 			}),
 	})

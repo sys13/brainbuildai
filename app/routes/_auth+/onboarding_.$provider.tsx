@@ -41,7 +41,7 @@ export const prefilledProfileKey = 'prefilledProfile'
 
 const SignupFormSchema = z.object({
 	agreeToTermsOfServiceAndPrivacyPolicy: z.boolean({
-		required_error: 'You must agree to the terms of service and privacy policy',
+		message: 'You must agree to the terms of service and privacy policy',
 	}),
 	imageUrl: z.string().optional(),
 	name: NameSchema,
