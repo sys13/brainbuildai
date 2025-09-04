@@ -124,7 +124,7 @@ test('remember 2FA verification for trusted devices', async ({
 	// This tests the "remember this device" feature that many 2FA systems have
 
 	const password = fakerEN.internet.password()
-	const user = await insertNewUser({ password })
+	const _user = await insertNewUser({ password })
 
 	// Similar setup as above
 	// Login with username/password, get to 2FA prompt

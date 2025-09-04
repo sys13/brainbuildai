@@ -3,20 +3,6 @@ import type {
 	SectionsData,
 	sectionNames,
 } from '#app/routes/_internal+/prds+/$prdId+/_prd_id.index'
-import type {
-	DesignImageClient,
-	DesignLinkClient,
-	ExistingAndSuggestedClient,
-	ExistingClient,
-	ExistingUserInterviewProps,
-	IntegrationConfigClient,
-} from '#app/utils/sort-objs'
-import type {
-	CommentProps,
-	ExtendedCommentProps,
-} from '#app/utils/suggestions.server/get-comments.js'
-
-import React from 'react'
 import { BackgroundInfoSection } from '#app/routes/resources+/prd-background-info.js'
 import { DesignSection } from '#app/routes/resources+/prd-design.js'
 import { FeaturesSection } from '#app/routes/resources+/prd-features.js'
@@ -29,6 +15,19 @@ import { SuccessCriteriaSection } from '#app/routes/resources+/prd-success-crite
 import { SummarySection } from '#app/routes/resources+/prd-summary.js'
 import { TicketsSection } from '#app/routes/resources+/prd-tickets.js'
 import { UserInterviewSection } from '#app/routes/resources+/prd-user-interviews.js'
+import type {
+	DesignImageClient,
+	DesignLinkClient,
+	ExistingAndSuggestedClient,
+	ExistingClient,
+	ExistingUserInterviewProps,
+	IntegrationConfigClient,
+} from '#app/utils/sort-objs'
+import type {
+	CommentProps,
+	ExtendedCommentProps,
+} from '#app/utils/suggestions.server/get-comments.js'
+import React from 'react'
 import { Icon } from '../ui/icon'
 import { PrdComment } from './prd-comment'
 export interface PrdPersonaProps {
@@ -63,7 +62,7 @@ export function PRDSection<K extends keyof SectionsData>({
 	isCommenter: boolean
 	comments: ExtendedCommentProps[]
 }) {
-	const [showLoader, setShowLoader] = React.useState(false)
+	const [_showLoader, setShowLoader] = React.useState(false)
 
 	React.useEffect(() => {
 		const timer = setTimeout(() => setShowLoader(true), 500) // 👈 show loader after 300ms
@@ -179,7 +178,6 @@ export function PRDSection<K extends keyof SectionsData>({
 			SectionComponent = (
 				<ProblemsSection
 					problems={data as ExistingAndSuggestedClient[]}
-					prdProblems={data as ExistingAndSuggestedClient[]}
 					prdId={prdId}
 					isEditor={isEditor}
 				/>
@@ -403,7 +401,7 @@ export function PRDSection<K extends keyof SectionsData>({
 
 	return (
 		<div className="relative">
-			{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+			{/* biome-ignore lint/a11y/useKeyWithClickEvents: misc */}
 			<div
 				className="w-full flex items-center cursor-pointer hover:text-secondary-foreground/70 justify-between"
 				onClick={() => {

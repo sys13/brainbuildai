@@ -1,7 +1,7 @@
 import { format, formatDistanceToNow } from 'date-fns'
 
 export function formatDateRelative(date: Date) {
-	const diff = new Date().getTime() - date.getTime()
+	const diff = Date.now() - date.getTime()
 	const oneDay = 24 * 60 * 60 * 1000 // milliseconds in a day
 
 	if (diff < oneDay) {

@@ -1,11 +1,11 @@
-import type { ColumnDef } from '@tanstack/react-table'
-import { useMemo } from 'react'
-import { Link } from 'react-router'
 import { DataTable } from '#app/components/data-table'
 import { Button } from '#app/components/ui/button'
 import InPlaceAdd from '#app/routes/resources+/in-place-add'
 import type { models } from '#app/utils/models'
 import type { ItemMaySuggested } from '#app/utils/types'
+import type { ColumnDef } from '@tanstack/react-table'
+import { useMemo } from 'react'
+import { Link } from 'react-router'
 
 import { usePRDData } from '#app/utils/useProjectData'
 import { DataTableColumnHeader } from './ui/data-table-column-header'
@@ -34,6 +34,7 @@ export function DetailsRelation<T extends keyof typeof models>({
 	if (!prd) {
 		return null
 	}
+	// biome-ignore lint/correctness/useHookAtTopLevel: misc
 	const columns: ColumnDef<ItemMaySuggested>[] = useMemo(() => {
 		return [
 			{

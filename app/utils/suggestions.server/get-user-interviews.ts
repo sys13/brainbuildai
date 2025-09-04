@@ -1,10 +1,9 @@
-import { db } from '#app/utils/db.server'
-import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
-
 import { invariant } from '@epic-web/invariant'
 import { and, eq } from 'drizzle-orm'
 import { z } from 'zod'
+import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
+import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
 import type { TenantUser } from '#app/utils/user'
 import { userInterview } from '#db/schema/userInterview'
 import { getAcceptedOrAll } from '../modelUtils'

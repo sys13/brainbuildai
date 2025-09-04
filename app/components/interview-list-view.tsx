@@ -1,5 +1,4 @@
 import { Link } from 'react-router'
-import type { models } from '#app/utils/models'
 import { Button } from './ui/button'
 export interface UserInterview {
 	id: string
@@ -12,22 +11,18 @@ export interface UserInterview {
 	updatedAt: Date
 }
 
-type ObjType =
-	| 'persona'
-	| 'goal'
-	| 'problem'
-	| 'success_criteria'
-	| 'feature'
-	| 'userInterview'
+// type ObjType =
+// 	| 'persona'
+// 	| 'goal'
+// 	| 'problem'
+// 	| 'success_criteria'
+// 	| 'feature'
+// 	| 'userInterview'
 interface UserInterviewListProps {
-	model: (typeof models)[ObjType]
 	interviews: UserInterview[]
 }
 
-export function UserInterviewList({
-	interviews,
-	model,
-}: UserInterviewListProps) {
+export function UserInterviewList({ interviews }: UserInterviewListProps) {
 	return (
 		<div>
 			<div className="flex justify-between items-center mb-4">

@@ -14,7 +14,7 @@ const tableName = 'persona'
 
 export const persona = pgTable(
 	tableName,
-	(t) => ({
+	(_t) => ({
 		...standardFields,
 		isAccepted,
 		isAddedManually,

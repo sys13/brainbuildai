@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { type Item, cn } from '#app/utils/misc'
+import { cn, type Item } from '#app/utils/misc'
 import ButtonLink from './link-button'
 import type { NavItem } from './sidebar-items-data'
 import { Icon } from './ui/icon'

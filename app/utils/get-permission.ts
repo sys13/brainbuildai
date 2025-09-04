@@ -1,7 +1,7 @@
 import { db } from '#app/utils/db.server'
 import type { TenantUser } from '#app/utils/user'
 
-const entities = ['prd', 'persona', 'goal', 'feature'] as const
+const _entities = ['prd', 'persona', 'goal', 'feature'] as const
 
 interface PermissionProps {
 	isReader: boolean

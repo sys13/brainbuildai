@@ -10,11 +10,12 @@ import {
 	vectorText,
 } from '#db/schema/base'
 import { prdId } from './prd'
+
 const tableName = 'goal'
 
 export const goal = pgTable(
 	tableName,
-	(t) => ({
+	(_t) => ({
 		...standardFields,
 		isAccepted,
 		isAddedManually,

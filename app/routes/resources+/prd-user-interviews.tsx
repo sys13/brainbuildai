@@ -17,7 +17,7 @@ const schema = z.object({
 	prdId: z.string(),
 })
 
-const model = models.prdPersona
+const _model = models.prdPersona
 
 export async function action({ request }: Route.ActionArgs) {
 	const formData = await request.formData()
@@ -44,11 +44,11 @@ export function UserInterviewSection({
 	isEditor: boolean
 }) {
 	// const acceptedItems = sortByAccepted(items.filter((item) => item.isAccepted))
-	const [inputValue, setInputValue] = useState('')
+	const [_inputValue, setInputValue] = useState('')
 
-	const buttonRef = React.useRef<HTMLButtonElement>(null)
+	const _buttonRef = React.useRef<HTMLButtonElement>(null)
 	const navigate = useNavigate()
-	const handleSubmit = (e: React.FormEvent) => {
+	const _handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 		// Call your submit function here v
 		submit(e.currentTarget as HTMLFormElement, {
@@ -61,7 +61,7 @@ export function UserInterviewSection({
 
 	const lastResult = useActionData<typeof action>()
 	const submit = useDebounceSubmit()
-	const [form, fields] = useForm({
+	const [form, _fields] = useForm({
 		constraint: getZodConstraint(schema),
 		id: 'user-interviews-section',
 		lastResult,

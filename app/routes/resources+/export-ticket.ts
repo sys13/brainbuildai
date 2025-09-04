@@ -7,6 +7,7 @@ import { db } from '#app/utils/db.server.js'
 import { createGithubIssue } from '#app/utils/github.server.js'
 import { createToastHeaders } from '#app/utils/toast.server.js'
 import { ticket } from '#db/schema/ticket'
+
 const schema = z.object({
 	prdId: z.string(),
 	target: z.string(),

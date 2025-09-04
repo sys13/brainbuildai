@@ -8,7 +8,7 @@ import { authSessionStorage } from '#app/utils/session.server'
 import { redirectWithToast } from '#app/utils/toast.server'
 import { verifySessionStorage } from '#app/utils/verification.server'
 import { twoFAVerificationType } from '../_internal+/settings+/two-factor'
-import { type VerifyFunctionArgs, getRedirectToUrl } from './verify.server'
+import { getRedirectToUrl, type VerifyFunctionArgs } from './verify.server'
 
 const verifiedTimeKey = 'verified-time'
 const unverifiedSessionIdKey = 'unverified-session-id'

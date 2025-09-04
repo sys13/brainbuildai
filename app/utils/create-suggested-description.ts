@@ -20,7 +20,7 @@ export async function createSuggestedDescription({
 }): Promise<null | string> {
 	const drizzleSchema = model.drizzleSchema
 
-	const prd = await db.query.prd.findFirst({
+	const _prd = await db.query.prd.findFirst({
 		where: { id: prdId, tenantId },
 	})
 

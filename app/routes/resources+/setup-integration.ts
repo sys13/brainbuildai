@@ -6,6 +6,7 @@ import { requireInternalUser } from '#app/utils/auth.server'
 import { db } from '#app/utils/db.server'
 import { createToastHeaders } from '#app/utils/toast.server.js'
 import { integrationConfig } from '#db/schema/integrationConfig'
+
 const schema = z
 	.object({
 		prdId: z.string(),

@@ -1,13 +1,13 @@
 import { promiseHash } from 'remix-utils/promise'
 import { getAll } from '#app/models/sqlUtils.server'
 import type { Item } from './misc'
+import { models } from './models'
 import {
-	type HasOneRelations,
-	type ManyToManyRelations,
 	getHasOneRelations,
 	getMTMRelations,
+	type HasOneRelations,
+	type ManyToManyRelations,
 } from './modelUtils'
-import { models } from './models'
 import type { TenantUser } from './user'
 
 type Model = (typeof models)[keyof typeof models]

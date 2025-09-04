@@ -1,5 +1,6 @@
 import { OpenImgContextProvider } from 'openimg/react'
 import {
+	data,
 	Links,
 	type LinksFunction,
 	type LoaderFunctionArgs,
@@ -8,7 +9,6 @@ import {
 	Scripts,
 	ScrollRestoration,
 	type UIMatch,
-	data,
 	useLoaderData,
 	useMatches,
 	useRouteLoaderData,
@@ -35,7 +35,7 @@ import { pipeHeaders } from './utils/headers.server'
 import { honeypot } from './utils/honeypot.server'
 import { combineHeaders, getDomainUrl, getImgSrc } from './utils/misc'
 import { useNonce } from './utils/nonce-provider'
-import { type Theme, getTheme } from './utils/theme.server'
+import { getTheme, type Theme } from './utils/theme.server'
 import { makeTimings, time } from './utils/timing.server'
 import { getToast } from './utils/toast.server'
 import { useOptionalUser } from './utils/user'
@@ -234,19 +234,17 @@ function App() {
 			optimizerEndpoint="/resources/images"
 			getSrc={getImgSrc}
 		>
-			<>
-				<HighLevelLayout
-					allProjects={data.allProjects}
-					routeType={routeType}
-					theme={data.requestInfo.userPrefs.theme}
-					user={user}
-					initialSidebarOpen={data.sidebarOpen}
-				>
-					<Outlet />
-				</HighLevelLayout>
-				<Toaster closeButton position="top-center" theme={theme} />
-				<EpicProgress />
-			</>
+			<HighLevelLayout
+				allProjects={data.allProjects}
+				routeType={routeType}
+				theme={data.requestInfo.userPrefs.theme}
+				user={user}
+				initialSidebarOpen={data.sidebarOpen}
+			>
+				<Outlet />
+			</HighLevelLayout>
+			<Toaster closeButton position="top-center" theme={theme} />
+			<EpicProgress />
 		</OpenImgContextProvider>
 	)
 }

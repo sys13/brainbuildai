@@ -9,6 +9,7 @@ import type { ExistingAndSuggestedClient } from '#app/utils/sort-objs'
 import getRisks from '#app/utils/suggestions.server/get-risks.js'
 import { createToastHeaders } from '#app/utils/toast.server.js'
 import type { Route } from './+types/prd-personas'
+
 const schema = z.object({
 	prdId: z.string(),
 	regenerate: z.coerce.boolean().optional(),

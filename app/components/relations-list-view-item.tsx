@@ -1,5 +1,5 @@
+import { cn, type Item } from '#app/utils/misc'
 import { Link, useFetcher } from 'react-router'
-import { type Item, cn } from '#app/utils/misc'
 import type { ListViewProps } from './list-view'
 import { Button } from './ui/button'
 import { Icon } from './ui/icon'
@@ -10,7 +10,6 @@ export function RelationsListViewItem({
 	mainModelId,
 	mainModelName,
 	model,
-	prdId,
 }: {
 	badgeText?: Promise<string>
 	item: Item

@@ -1,7 +1,8 @@
 import OpenAI from 'openai'
 import { z } from 'zod'
 import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+
+const _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export default async function getAiSummary({
 	company,

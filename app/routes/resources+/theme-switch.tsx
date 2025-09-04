@@ -14,7 +14,7 @@ import { DropdownMenuItem } from '#app/components/ui/dropdown-menu'
 import { Icon, type IconName } from '#app/components/ui/icon'
 import { useHints, useOptionalHints } from '#app/utils/client-hints'
 import { useOptionalRequestInfo, useRequestInfo } from '#app/utils/request-info'
-import { type Theme, setTheme } from '#app/utils/theme.server'
+import { setTheme, type Theme } from '#app/utils/theme.server'
 
 const ThemeFormSchema = z.object({
 	theme: z.enum(['system', 'light', 'dark']),

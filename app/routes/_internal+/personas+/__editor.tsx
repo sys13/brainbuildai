@@ -4,13 +4,13 @@ import { useActionData, useFetcher } from 'react-router'
 import { FormField } from '#app/components/form-fields-builder'
 import { FormSubmitButton } from '#app/components/form-submit-button'
 import type { EditorProps } from '#app/routes/resources+/editor-utils'
+import { models } from '#app/utils/models'
 import {
-	type HasOneRelations,
-	type ManyToManyRelations,
 	getHasOneRelations,
 	getMTMRelations,
+	type HasOneRelations,
+	type ManyToManyRelations,
 } from '#app/utils/modelUtils'
-import { models } from '#app/utils/models'
 import type { action } from './__editor.server'
 
 export const model = models.persona

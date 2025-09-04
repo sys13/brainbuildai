@@ -1,6 +1,3 @@
-import { test as base } from '@playwright/test'
-import { eq } from 'drizzle-orm'
-import * as setCookieParser from 'set-cookie-parser'
 import { keysToTrues } from '#app/models/sqlUtils.server'
 import { createTenant } from '#app/models/tenant.server'
 import { getSessionExpirationDate, sessionKey } from '#app/utils/auth.server'
@@ -11,6 +8,9 @@ import { password as passwordSchema, session } from '#db/schema/authentication'
 import { tenant, user } from '#db/schema/base'
 import { persona } from '#db/schema/persona'
 import { product } from '#db/schema/product'
+import { test as base } from '@playwright/test'
+import { eq } from 'drizzle-orm'
+import * as setCookieParser from 'set-cookie-parser'
 import { userToRole } from '../db/schema/role'
 import { createPassword, createUser } from './db-utils'
 
@@ -168,9 +168,8 @@ export const test = base.extend<{
 	insertNewUser(options?: GetOrInsertUserOptions): Promise<User>
 	login(options?: GetOrInsertUserOptions): Promise<User>
 }>({
-	// biome-ignore lint/correctness/noEmptyPattern: <explanation>
 	insertNewUser: async ({}, use) => {
-		let userId: string | undefined = undefined
+		let userId: string | undefined
 		await use(async (options) => {
 			const user = await getOrInsertUser(options)
 			userId = user.id
@@ -181,7 +180,7 @@ export const test = base.extend<{
 		}
 	},
 	login: async ({ page }, use) => {
-		let userId: string | undefined = undefined
+		let userId: string | undefined
 		await use(async (options) => {
 			const user = await getOrInsertUser(options)
 

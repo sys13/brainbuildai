@@ -1,5 +1,3 @@
-import type * as React from 'react'
-import { useLocation } from 'react-router'
 import { NavUser } from '#app/components/nav-user'
 import {
 	Sidebar,
@@ -15,8 +13,9 @@ import { createAvatarName } from '#app/utils/avatar-name'
 import type { ModelName } from '#app/utils/modelNames'
 import { models } from '#app/utils/models'
 import type { Theme } from '#app/utils/theme.server'
-import { usePRDData } from '#app/utils/useProjectData'
 import { useUser } from '#app/utils/user'
+import type * as React from 'react'
+import { useLocation } from 'react-router'
 import { NavItems } from './nav-items'
 import type { IconName } from './ui/icon'
 
@@ -54,7 +53,7 @@ export function internalNavItems(prdId: string): NavItem[] {
 	return items
 }
 
-function CodeItem({ prdId }: { prdId: string }): NavItem {
+function _CodeItem({ prdId }: { prdId: string }): NavItem {
 	const location = useLocation()
 	const url = `/prds/${prdId}/code`
 	return {
@@ -81,7 +80,7 @@ export function AppSidebar({
 	...props
 }: React.ComponentProps<typeof Sidebar> & { theme: null | Theme }) {
 	const user = useUser()
-	const { prd } = usePRDData() ?? { prd: null }
+	// const { prd } = usePRDData() ?? { prd: null }
 	const location = useLocation()
 	const dashboardItem = {
 		icon: 'home' as IconName,
@@ -97,7 +96,7 @@ export function AppSidebar({
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton asChild size="lg">
-							{/* biome-ignore lint/a11y/useValidAnchor: <explanation> */}
+							{/* biome-ignore lint/a11y/useValidAnchor: will remove */}
 							<a href="#">
 								<div className="flex aspect-square size-8 items-center justify-center rounded-lg">
 									<img

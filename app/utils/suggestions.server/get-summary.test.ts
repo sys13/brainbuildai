@@ -1,10 +1,8 @@
-import { type Mock, describe, expect, it, vi } from 'vitest'
-
-import { db } from '#app/utils/db.server'
-import getSummary from '#app/utils/suggestions.server/get-summary'
-
 import { eq } from 'drizzle-orm'
+import { describe, expect, it, type Mock, vi } from 'vitest'
+import { db } from '#app/utils/db.server'
 import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
+import getSummary from '#app/utils/suggestions.server/get-summary'
 import { tenant } from '#db/schema/base.js'
 import { summary } from '#db/schema/summary'
 import { createTestUserAndPrd } from '#tests/utils'
@@ -58,7 +56,7 @@ describe('getSummary', () => {
 
 	it('should throw if tenant not found', async () => {
 		const { user, prd } = await createTestUserAndPrd()
-		const readerUser = {
+		const _readerUser = {
 			...user,
 			roles: ['reader'], // If your getPermission() uses roles
 		}

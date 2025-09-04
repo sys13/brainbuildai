@@ -1,7 +1,7 @@
 export function pick<T extends object, K extends keyof T>(obj: T, keys: K[]) {
 	return keys.reduce(
 		(acc, key) => {
-			if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			if (Object.hasOwn(obj, key)) {
 				acc[key] = obj[key]
 			}
 

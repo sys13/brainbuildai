@@ -40,7 +40,7 @@ export function InputOTPConform({
 			>
 				<InputOTPGroup>
 					{new Array(length).fill(0).map((_, index) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						// biome-ignore lint/suspicious/noArrayIndexKey: they are unique
 						<InputOTPSlot index={index} key={index} />
 					))}
 				</InputOTPGroup>

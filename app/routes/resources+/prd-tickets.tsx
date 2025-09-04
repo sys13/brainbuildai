@@ -1,20 +1,19 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
-import { z } from 'zod'
-import { ListViewItem } from '#app/components/list-view-input'
-import { Button } from '#app/components/ui/button'
-import { cn } from '#app/utils/misc'
-import { models } from '#app/utils/models'
-
 import { invariantResponse } from '@epic-web/invariant'
 import { useEffect, useRef, useState } from 'react'
 import { data, useFetcher } from 'react-router'
+import { z } from 'zod'
 import { Field, RichTextField } from '#app/components/forms'
 import { IntegrationModal } from '#app/components/integration-modal.js'
+import { ListViewItem } from '#app/components/list-view-input'
 import { SuggestedItem } from '#app/components/suggested-item.js'
+import { Button } from '#app/components/ui/button'
 import { Icon } from '#app/components/ui/icon.js'
 import { getUser, requireInternalUser } from '#app/utils/auth.server'
 import { db } from '#app/utils/db.server'
+import { cn } from '#app/utils/misc'
+import { models } from '#app/utils/models'
 import type {
 	ExistingAndSuggestedClient,
 	IntegrationConfigClient,
@@ -23,6 +22,7 @@ import getTickets from '#app/utils/suggestions.server/get-tickets.js'
 import { createToastHeaders } from '#app/utils/toast.server.js'
 import { ticket } from '#db/schema/ticket.js'
 import type { Route } from './+types/prd-personas'
+
 const schema = z.object({
 	prdId: z.string(),
 	name: z.string(), // allow undefined/empty initially

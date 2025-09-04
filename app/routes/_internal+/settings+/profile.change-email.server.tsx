@@ -2,8 +2,8 @@ import * as E from '@react-email/components'
 import { eq } from 'drizzle-orm'
 import { data } from 'react-router'
 import {
-	type VerifyFunctionArgs,
 	requireRecentVerification,
+	type VerifyFunctionArgs,
 } from '#app/routes/_auth+/verify.server'
 import { db } from '#app/utils/db.server'
 import { sendEmail } from '#app/utils/email.server'

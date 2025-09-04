@@ -21,12 +21,12 @@ import {
 import { handleVerification as handleOnboardingVerification } from './onboarding.server'
 import { handleVerification as handleResetPasswordVerification } from './reset-password.server'
 import {
-	type VerificationTypes,
-	VerifySchema,
 	codeQueryParam,
 	redirectToQueryParam,
 	targetQueryParam,
 	typeQueryParam,
+	type VerificationTypes,
+	VerifySchema,
 } from './verify'
 
 export interface VerifyFunctionArgs {

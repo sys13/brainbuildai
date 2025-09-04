@@ -11,6 +11,7 @@ import {
 	vectorText,
 } from '#db/schema/base'
 import { prdId } from './prd'
+
 const tableName = 'ticket'
 
 export const ticket = pgTable(

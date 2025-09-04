@@ -29,7 +29,7 @@ export interface Props {
 
 export function Editor({ obj }: Props) {
 	const lastResult = useActionData<typeof action>()
-	const [name, setName] = React.useState(obj?.name ?? '')
+	const [_name, _setName] = React.useState(obj?.name ?? '')
 	const [description, setDescription] = React.useState(obj?.description ?? '')
 	const [context, setContext] = React.useState('')
 	const fetcher = useFetcher<typeof action>()

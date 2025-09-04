@@ -9,6 +9,7 @@ import {
 	tenantIdIndex,
 	vectorText,
 } from '#db/schema/base'
+
 const tableName = 'user_interview'
 
 export const userInterview = pgTable(

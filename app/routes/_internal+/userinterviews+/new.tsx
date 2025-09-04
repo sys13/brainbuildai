@@ -9,6 +9,7 @@ import {
 } from '#app/utils/newUtils.server'
 import ObjErrorBoundary from '#app/utils/objErrorBoundary'
 import { Editor, model } from './__editor'
+
 export { action } from './__editor.server'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {

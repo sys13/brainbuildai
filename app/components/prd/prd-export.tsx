@@ -1,5 +1,3 @@
-import jsPDF from 'jspdf'
-import { useState } from 'react'
 import type {
 	ContextFileClient,
 	DesignImageClient,
@@ -8,6 +6,8 @@ import type {
 	ExistingClient,
 	ExistingUserInterviewProps,
 } from '#app/utils/sort-objs'
+import jsPDF from 'jspdf'
+import { useState } from 'react'
 import { ExportOptions } from '../export-options'
 export interface Prd {
 	name: string
@@ -47,11 +47,9 @@ type PRD = {
 	}
 }
 export function PrdExport({
-	prdId,
 	name,
 	data,
 }: {
-	prdId: string
 	name: string
 	data: {
 		summary: Promise<ExistingClient>

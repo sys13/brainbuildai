@@ -4,7 +4,7 @@ import { invariantResponse } from '@epic-web/invariant'
 import { marked } from 'marked'
 import { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Form, data, useActionData, useFetcher } from 'react-router'
+import { data, Form, useActionData, useFetcher } from 'react-router'
 import rehypeRaw from 'rehype-raw'
 import { useDebounceSubmit } from 'remix-utils/use-debounce-submit'
 import { z } from 'zod'
@@ -17,6 +17,7 @@ import type { ExistingClient } from '#app/utils/sort-objs'
 import getSummary from '#app/utils/suggestions.server/get-summary'
 import { summary } from '#db/schema/summary'
 import type { Route } from './+types/prd-context'
+
 const schema = z.object({
 	prdId: z.string(),
 	textDump: z.string().optional(),
@@ -99,7 +100,11 @@ export function SummarySection({
 	prdId,
 	summary,
 	isEditor,
-}: { prdId: string; summary: ExistingClient; isEditor: boolean }) {
+}: {
+	prdId: string
+	summary: ExistingClient
+	isEditor: boolean
+}) {
 	const lastResult = useActionData<ActionResponse>()
 	const submit = useDebounceSubmit()
 	const fetcher = useFetcher()

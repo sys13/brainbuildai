@@ -19,8 +19,8 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 	const user = await requireInternalUser(request)
 
 	const searchParams = getSearchParams(request.url)
-	const searchString = decodeSearchString(searchParams.get('searchString'))
-	const moreSuggestions = Number(searchParams.get('moreSuggestions'))
+	const _searchString = decodeSearchString(searchParams.get('searchString'))
+	const _moreSuggestions = Number(searchParams.get('moreSuggestions'))
 	// const defaultValues = getDefaultValuesFromSearchParams(
 	// 	model,
 	// 	new URL(request.url).searchParams,

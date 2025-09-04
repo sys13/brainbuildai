@@ -2,10 +2,10 @@ import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import {
 	type ActionFunctionArgs,
+	data,
 	Form,
 	type LoaderFunctionArgs,
 	type MetaFunction,
-	data,
 	redirect,
 	useActionData,
 	useLoaderData,
@@ -70,7 +70,7 @@ export async function action({ request }: ActionFunctionArgs) {
 	const submission = await parseWithZod(formData, {
 		async: true,
 		schema: (intent) =>
-			SignupFormSchema.superRefine(async (data, ctx) => {
+			SignupFormSchema.superRefine(async (_data, ctx) => {
 				const existingUser = await db.query.user.findFirst({
 					columns: { id: true, internal: true },
 					where: { email },

@@ -1,10 +1,14 @@
 import { db } from '#app/utils/db.server'
 import { models } from '#app/utils/models'
+
 const tableSchema = models.prd.drizzleSchema
 export async function createTestPrd({
 	tenantId,
 	userId,
-}: { tenantId: string; userId: string }) {
+}: {
+	tenantId: string
+	userId: string
+}) {
 	const result = await db
 		.insert(tableSchema)
 		.values({

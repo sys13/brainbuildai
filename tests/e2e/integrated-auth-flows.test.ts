@@ -2,8 +2,8 @@ import { fakerEN } from '@faker-js/faker'
 import { expect, test } from '#tests/playwright-utils'
 
 const URL_REGEX = /(?<url>https?:\/\/[^\s$.?#].\S*)/
-const CODE_REGEX = /Here's your verification code: (?<code>\w+)/
-function extractUrl(text: string) {
+const _CODE_REGEX = /Here's your verification code: (?<code>\w+)/
+function _extractUrl(text: string) {
 	const match = text.match(URL_REGEX)
 	return match?.groups?.url
 }

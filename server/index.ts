@@ -197,7 +197,7 @@ async function getBuild() {
 		const build = viteDevServer
 			? await viteDevServer.ssrLoadModule('virtual:react-router/server-build')
 			: // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore it is okay
+				// @ts-expect-error it is okay
 				await import('../build/server/index.js')
 
 		return { build: build as unknown as ServerBuild, error: null }

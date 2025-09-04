@@ -154,7 +154,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 		username: profile.username?.replace(/\W/g, '_').toLowerCase(),
 	})
 	verifySession.set(providerIdKey, profile.id)
-	const onboardingRedirect = [
+	const _onboardingRedirect = [
 		`/dashboard/${providerName}`,
 		redirectTo ? new URLSearchParams({ redirectTo }) : null,
 	]

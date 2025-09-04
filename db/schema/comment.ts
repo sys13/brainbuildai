@@ -2,11 +2,12 @@ import { boolean, pgTable, text } from 'drizzle-orm/pg-core'
 import { omit } from '#app/utils/lodash'
 import { standardFields, tenantIdIndex } from '#db/schema/base'
 import { prdId } from './prd'
+
 const tableName = 'comment'
 
 export const comment = pgTable(
 	tableName,
-	(t) => ({
+	(_t) => ({
 		...omit(standardFields, ['name', 'description']),
 		prdId,
 		text: text('text').notNull(),

@@ -7,6 +7,7 @@ import { db } from '#app/utils/db.server'
 import { parseWebsite } from '#app/utils/parseWebsite.js'
 import { tenant } from '#db/schema/base'
 import { job } from '#db/schema/job.js'
+
 const schema = z.object({
 	companyWebsite: z.string().optional(),
 })

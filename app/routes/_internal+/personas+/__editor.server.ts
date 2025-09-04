@@ -1,10 +1,10 @@
-import { parseWithZod } from '@conform-to/zod'
-import type { ActionFunctionArgs } from 'react-router'
-import { z } from 'zod'
 import { filterByTenant } from '#app/models/sqlUtils.server'
 import { requireInternalUser } from '#app/utils/auth.server'
 import { db } from '#app/utils/db.server'
 import { redirectWithToast } from '#app/utils/toast.server'
+import { parseWithZod } from '@conform-to/zod'
+import type { ActionFunctionArgs } from 'react-router'
+import { z } from 'zod'
 import { model, schema } from './__editor'
 
 const tableSchema = model.drizzleSchema
@@ -16,8 +16,8 @@ export const withCols = {
 	// },
 } as const
 
-export async function action({ params, request }: ActionFunctionArgs) {
-	const { id: userId, tenantId } = await requireInternalUser(request)
+export async function action({ request }: ActionFunctionArgs) {
+	const { tenantId } = await requireInternalUser(request)
 	const formData = await request.formData()
 
 	// const { prdId } = params

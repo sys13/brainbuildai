@@ -1,6 +1,6 @@
+import { cn } from '#app/utils/misc'
 import type { IconName } from '@/icon-name'
 import type { SVGProps } from 'react'
-import { cn } from '#app/utils/misc'
 import href from './icons/sprite.svg'
 
 export { href, type IconName }
@@ -55,7 +55,6 @@ export function Icon({
 	}
 
 	return (
-		// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 		<svg
 			{...props}
 			className={cn(sizeClassName[size], 'inline self-center', className)}

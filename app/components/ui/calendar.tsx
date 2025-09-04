@@ -1,11 +1,11 @@
+import { Button, buttonVariants } from '#app/components/ui/button'
+import { cn } from '#app/utils/misc.js'
 import * as React from 'react'
 import {
 	type DayButton,
 	DayPicker,
 	getDefaultClassNames,
 } from 'react-day-picker'
-import { Button, buttonVariants } from '#app/components/ui/button'
-import { cn } from '#app/utils/misc.js'
 import { Icon } from './icon'
 
 function Calendar({
@@ -119,6 +119,7 @@ function Calendar({
 				...classNames,
 			}}
 			components={{
+				// biome-ignore lint/correctness/noNestedComponentDefinitions: custom
 				Root: ({ className, rootRef, ...props }) => {
 					return (
 						<div
@@ -129,7 +130,8 @@ function Calendar({
 						/>
 					)
 				},
-				Chevron: ({ className, orientation, ...props }) => {
+				// biome-ignore lint/correctness/noNestedComponentDefinitions: custom
+				Chevron: ({ className, orientation }) => {
 					if (orientation === 'left') {
 						return (
 							<Icon className={cn('size-4', className)} name="chevron-left" />
@@ -147,6 +149,7 @@ function Calendar({
 					)
 				},
 				DayButton: CalendarDayButton,
+				// biome-ignore lint/correctness/noNestedComponentDefinitions: custom component
 				WeekNumber: ({ children, ...props }) => {
 					return (
 						<td {...props}>

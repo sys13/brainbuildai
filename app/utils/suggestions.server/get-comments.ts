@@ -17,7 +17,9 @@ export interface ExtendedCommentProps extends CommentProps {
 }
 export default async function getComments({
 	prdId,
-}: { prdId: string }): Promise<ExtendedCommentProps[]> {
+}: {
+	prdId: string
+}): Promise<ExtendedCommentProps[]> {
 	const existingComments = await db.query.comment.findMany({
 		columns: {
 			id: true,

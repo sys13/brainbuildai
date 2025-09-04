@@ -1,9 +1,6 @@
 // components/prd/OptimisticItemSection.tsx
 
 import { useEffect, useState } from 'react'
-
-import { Input } from '../ui/input'
-
 import { useFetcher } from 'react-router'
 import { useDebounceSubmit } from 'remix-utils/use-debounce-submit'
 import { cn } from '#app/lib/utils.js'
@@ -12,6 +9,7 @@ import type { models } from '../../utils/models'
 import { ListViewItem } from '../list-view-input'
 import { SuggestedItem } from '../suggested-item'
 import { Button } from '../ui/button'
+import { Input } from '../ui/input'
 
 type ObjType =
 	| 'persona'

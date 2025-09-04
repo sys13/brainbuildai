@@ -23,7 +23,7 @@ export function getAllPrdData({
 }) {
 	const tenantId = user.tenantId
 
-	const prdPromise = db.query.prd.findFirst({
+	const _prdPromise = db.query.prd.findFirst({
 		where: { id: prdId, tenantId },
 	})
 

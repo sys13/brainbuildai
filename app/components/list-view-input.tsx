@@ -1,7 +1,7 @@
-import { Suspense, useRef, useState } from 'react'
-import { Await, Link, useFetcher } from 'react-router'
 import { cn } from '#app/utils/misc'
 import type { ExistingAndSuggestedClient, Ticket } from '#app/utils/sort-objs'
+import { Suspense, useRef, useState } from 'react'
+import { Await, Link, useFetcher } from 'react-router'
 import { DeleteButton } from './delete-button'
 import type { ListViewProps } from './list-view'
 import { Badge } from './ui/badge'
@@ -14,7 +14,6 @@ export function ListViewItem({
 	item,
 	linkToDetails,
 	model,
-	prdId,
 	onRename,
 	onDelete,
 }: {
@@ -22,7 +21,6 @@ export function ListViewItem({
 	item: ExistingAndSuggestedClient | Ticket
 	linkToDetails?: boolean
 	model: ListViewProps['model']
-	prdId?: string
 	onRename?: (id: string, newName: string) => void
 	onDelete?: (id: string) => void
 }) {

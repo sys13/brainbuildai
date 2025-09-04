@@ -3,6 +3,7 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import type { FileUpload } from '@mjackson/form-data-parser'
 import { createId } from '@paralleldrive/cuid2'
+
 const STORAGE_ENDPOINT = process.env.AWS_ENDPOINT_URL_S3
 const STORAGE_BUCKET = process.env.BUCKET_NAME
 const STORAGE_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID
@@ -37,7 +38,7 @@ async function uploadToStorage(file: File | FileUpload, key: string) {
 
 	return key
 }
-async function getPresignedUploadUrl(key: string, contentType: string) {
+async function _getPresignedUploadUrl(key: string, contentType: string) {
 	const command = new PutObjectCommand({
 		Bucket: STORAGE_BUCKET, // e.g., "storage.brainbuildai.com"
 		Key: key,

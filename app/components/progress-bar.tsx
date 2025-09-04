@@ -43,7 +43,6 @@ function EpicProgress() {
 			aria-valuenow={delayedPending ? 50 : 0}
 			aria-valuemin={0}
 			aria-valuemax={100}
-			tabIndex={0}
 		>
 			<div
 				className={cn(

@@ -26,7 +26,7 @@ test('provider-specific onboarding flow', async ({
 }) => {
 	const userData = getOnboardingData()
 	const providerName = 'github'
-	const imageUrl = 'https://github.com/ghost.png'
+	const _imageUrl = 'https://github.com/ghost.png'
 
 	// We'll directly access the onboarding route since we can't fully test OAuth
 	// In a real test, we'd need to mock the OAuth flow

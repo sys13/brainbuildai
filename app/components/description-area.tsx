@@ -1,5 +1,5 @@
-import { Link } from 'react-router'
 import type { JSX } from 'react/jsx-runtime'
+import { Link } from 'react-router'
 import { formatDateTime } from '#app/utils/date-utils'
 
 export interface DescriptionItem {

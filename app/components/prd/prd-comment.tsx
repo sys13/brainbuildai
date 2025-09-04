@@ -1,4 +1,5 @@
 import { parseWithZod } from '@conform-to/zod'
+import { useRef, useState } from 'react'
 import { useDebounceSubmit } from 'remix-utils/use-debounce-submit'
 import { z } from 'zod'
 import { Button } from '#app/components/ui/button.js'
@@ -10,8 +11,6 @@ import {
 	PopoverTrigger,
 } from '#app/components/ui/popover'
 import type { ExtendedCommentProps } from '#app/utils/suggestions.server/get-comments'
-
-import { useRef, useState } from 'react'
 
 import type { Route } from '../../routes/resources+/+types/prd-personas'
 export enum SharePermission {
@@ -81,11 +80,11 @@ export function PrdComment({
 	}
 	const commentsToRender: CommentsWithThreadProps[] = []
 
-	comments.map((item) => {
+	comments.forEach((item) => {
 		if (!item.inThread) commentsToRender.push({ ...item, commentsInThread: [] })
 	})
-	comments.map((item) => {
-		commentsToRender.map((i, index) => {
+	comments.forEach((item) => {
+		commentsToRender.forEach((i, index) => {
 			if (item.inThread && item.objectId === i.id) {
 				commentsToRender[index].commentsInThread.push(item)
 			}

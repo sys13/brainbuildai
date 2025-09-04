@@ -7,7 +7,7 @@ import {
 import { Fragment, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import type { routeTypes } from '#app/root'
-import { type Item, cn } from '#app/utils/misc'
+import { cn, type Item } from '#app/utils/misc'
 import type { Theme } from '#app/utils/theme.server'
 import { usePRDData } from '#app/utils/useProjectData'
 import { useOptionalUser } from '#app/utils/user'
@@ -17,7 +17,7 @@ import Footer from './footer'
 import { NavBar } from './nav-bar'
 import { Logo } from './nav-logo'
 import { SidebarItems } from './sidebar-items'
-import { type NavItem, internalNavItems, navItems } from './sidebar-items-data'
+import { internalNavItems, type NavItem, navItems } from './sidebar-items-data'
 import { Icon } from './ui/icon'
 import { Separator } from './ui/separator'
 import {
@@ -98,96 +98,94 @@ export function Layout({
 	}
 
 	return (
-		<>
-			<div className="h-full ">
-				{
-					<>
-						<NavBar
-							isLoggedIn={!!user}
-							routeType={routeType}
-							setSidebarOpen={setSidebarOpen}
-							theme={theme}
-						/>
-						<Transition as={Fragment} show={sidebarOpen}>
-							<Dialog
-								as="div"
-								className="relative z-50 xl:hidden"
-								onClose={setSidebarOpen}
+		<div className="h-full ">
+			{
+				<>
+					<NavBar
+						isLoggedIn={!!user}
+						routeType={routeType}
+						setSidebarOpen={setSidebarOpen}
+						theme={theme}
+					/>
+					<Transition as={Fragment} show={sidebarOpen}>
+						<Dialog
+							as="div"
+							className="relative z-50 xl:hidden"
+							onClose={setSidebarOpen}
+						>
+							<TransitionChild
+								as={Fragment}
+								enter="transition-opacity ease-linear duration-300"
+								enterFrom="opacity-0"
+								enterTo="opacity-100"
+								leave="transition-opacity ease-linear duration-300"
+								leaveFrom="opacity-100"
+								leaveTo="opacity-0"
 							>
+								<div className="fixed inset-0 bg-black/10" />
+							</TransitionChild>
+
+							<div className="fixed inset-0 flex">
 								<TransitionChild
 									as={Fragment}
-									enter="transition-opacity ease-linear duration-300"
-									enterFrom="opacity-0"
-									enterTo="opacity-100"
-									leave="transition-opacity ease-linear duration-300"
-									leaveFrom="opacity-100"
-									leaveTo="opacity-0"
+									enter="transition ease-in-out duration-300 transform"
+									enterFrom="-translate-x-full"
+									enterTo="translate-x-0"
+									leave="transition ease-in-out duration-300 transform"
+									leaveFrom="translate-x-0"
+									leaveTo="-translate-x-full"
 								>
-									<div className="fixed inset-0 bg-black/10" />
+									<DialogPanel className="relative mr-16 flex w-full max-w-xs flex-1 ">
+										<TransitionChild
+											as={Fragment}
+											enter="ease-in-out duration-300"
+											enterFrom="opacity-0"
+											enterTo="opacity-100"
+											leave="ease-in-out duration-300"
+											leaveFrom="opacity-100"
+											leaveTo="opacity-0"
+										>
+											<div className="absolute left-full top-0 flex w-16 justify-center pt-5">
+												<button
+													className="-m-2.5 p-2.5"
+													onClick={() => setSidebarOpen(false)}
+													type="button"
+												>
+													<span className="sr-only">Close sidebar</span>
+													<Icon
+														aria-hidden="true"
+														className="text-primary"
+														name="x"
+														size="lg"
+													/>
+												</button>
+											</div>
+										</TransitionChild>
+										{/* Sidebar component, swap this element with another sidebar if you like */}
+										<MainArea
+											allProjects={allProjects}
+											navItems={navItemsWithCurrent}
+											routeType={routeType}
+											setSidebarOpen={setSidebarOpen}
+											user={user}
+										/>
+									</DialogPanel>
 								</TransitionChild>
+							</div>
+						</Dialog>
+					</Transition>
+				</>
+			}
 
-								<div className="fixed inset-0 flex">
-									<TransitionChild
-										as={Fragment}
-										enter="transition ease-in-out duration-300 transform"
-										enterFrom="-translate-x-full"
-										enterTo="translate-x-0"
-										leave="transition ease-in-out duration-300 transform"
-										leaveFrom="translate-x-0"
-										leaveTo="-translate-x-full"
-									>
-										<DialogPanel className="relative mr-16 flex w-full max-w-xs flex-1 ">
-											<TransitionChild
-												as={Fragment}
-												enter="ease-in-out duration-300"
-												enterFrom="opacity-0"
-												enterTo="opacity-100"
-												leave="ease-in-out duration-300"
-												leaveFrom="opacity-100"
-												leaveTo="opacity-0"
-											>
-												<div className="absolute left-full top-0 flex w-16 justify-center pt-5">
-													<button
-														className="-m-2.5 p-2.5"
-														onClick={() => setSidebarOpen(false)}
-														type="button"
-													>
-														<span className="sr-only">Close sidebar</span>
-														<Icon
-															aria-hidden="true"
-															className="text-primary"
-															name="x"
-															size="lg"
-														/>
-													</button>
-												</div>
-											</TransitionChild>
-											{/* Sidebar component, swap this element with another sidebar if you like */}
-											<MainArea
-												allProjects={allProjects}
-												navItems={navItemsWithCurrent}
-												routeType={routeType}
-												setSidebarOpen={setSidebarOpen}
-												user={user}
-											/>
-										</DialogPanel>
-									</TransitionChild>
-								</div>
-							</Dialog>
-						</Transition>
-					</>
+			<div className={cn('h-full p-4')}>
+				<main className={cn('h-full')}>{children}</main>
+				{
+					<div className=" pt-8 sm:pt-24 lg:px-8 lg:pt-32">
+						<Footer /> <Separator className="w-full" />
+					</div>
 				}
-
-				<div className={cn('h-full p-4')}>
-					<main className={cn('h-full')}>{children}</main>
-					{
-						<div className=" pt-8 sm:pt-24 lg:px-8 lg:pt-32">
-							<Footer /> <Separator className="w-full" />
-						</div>
-					}
-				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

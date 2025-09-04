@@ -15,7 +15,7 @@ const tableName = 'success_criteria'
 
 export const success_criteria = pgTable(
 	tableName,
-	(t) => ({
+	(_t) => ({
 		...standardFields,
 		isAccepted,
 		isAddedManually,

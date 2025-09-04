@@ -17,6 +17,7 @@ import { createToastHeaders } from '#app/utils/toast.server.js'
 import { designImage } from '#db/schema/designImage'
 import { designLink } from '../../../db/schema/designLink'
 import type { Route } from './+types/prd-personas'
+
 const baseSchema = z.object({
 	prdId: z.string(),
 	objType: z.enum([
@@ -214,10 +215,10 @@ export function DesignSection({
 }) {
 	const [isDragging, setIsDragging] = useState(false)
 	const [editingLinkId, setEditingLinkId] = useState<string | null>(null)
-	const [editName, setEditName] = useState('')
-	const [editUrl, setEditUrl] = useState('')
+	const [_editName, setEditName] = useState('')
+	const [_editUrl, setEditUrl] = useState('')
 	const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>('')
-	const [deleteImageConfirmId, setDeleteImageConfirmId] = useState<
+	const [_deleteImageConfirmId, _setDeleteImageConfirmId] = useState<
 		string | null
 	>(null)
 	const [deleteLinkConfirmId, setDeleteLinkConfirmId] = useState<string | null>(
@@ -231,7 +232,7 @@ export function DesignSection({
 	const formRef = useRef<HTMLFormElement>(null)
 	const isSuccess = editFetcher.data?.success
 	const isImageUploadSuccess = imageFetcher.data?.success
-	const isUploading = imageFetcher.state !== 'idle'
+	const _isUploading = imageFetcher.state !== 'idle'
 	// Auto-close edit mode after successful submit
 	useEffect(() => {
 		if (isSuccess) {

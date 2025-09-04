@@ -77,9 +77,9 @@
 }
 
 @theme {
-	--font-family-sans: Nunito Sans, Nunito Sans Fallback, ui-sans-serif,
-		system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-		"Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-sans:
+		Nunito Sans, Nunito Sans Fallback, ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 	/* Custom color palette */
 	--color-accent: hsl(var(--accent));
@@ -326,7 +326,7 @@
 }
 
 .tox .tox-editor-header {
-	z-index: unset !important;
+	z-index: unset;
 }
 
 .tox-statusbar__branding {

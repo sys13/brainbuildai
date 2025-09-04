@@ -1,7 +1,7 @@
 import { Readability } from '@mozilla/readability'
 import { eq } from 'drizzle-orm'
 import { JSDOM } from 'jsdom'
-import { type Page, chromium } from 'playwright'
+import { chromium, type Page } from 'playwright'
 import { z } from 'zod'
 import { filterById } from '#app/models/sqlUtils.server'
 import { tenant } from '#db/schema/base'
@@ -23,7 +23,11 @@ export async function parseWebsite({
 	jobId,
 	companyWebsite,
 	tenantId,
-}: { jobId: string; companyWebsite: string; tenantId: string }) {
+}: {
+	jobId: string
+	companyWebsite: string
+	tenantId: string
+}) {
 	await new Promise((resolve) => setTimeout(resolve, 4000))
 
 	const browser = await chromium.launch({ headless: true })
@@ -135,7 +139,7 @@ export async function parsePage({ page, url }: { page: Page; url: string }) {
 	return { data: { title: article.title, content: article.content } }
 }
 
-function getLinks(dom: JSDOM): string[] {
+function _getLinks(dom: JSDOM): string[] {
 	const links = Array.from(dom.window.document.querySelectorAll('a'))
 		.map((link) => link.href)
 		.filter((href) => href.startsWith('http'))

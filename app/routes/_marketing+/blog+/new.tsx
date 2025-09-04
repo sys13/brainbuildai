@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs } from 'react-router'
 import { requireSuperAdminUser } from '#app/utils/auth.server'
 import { Editor } from './__post-editor'
+
 export { action } from './__post-editor.server'
 
 export async function loader({ request }: LoaderFunctionArgs) {

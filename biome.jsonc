@@ -1,19 +1,20 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
 	"files": {
-		"ignore": [
-			".react-router/*",
-			"coverage*",
-			"lib",
-			"node_modules",
-			"pnpm-lock.yaml",
-			"**/*.snap",
-			"build",
-			"server-build",
-			"test-results",
-			"playwright-report",
-			"app/components/ui/icons/name.d.ts",
-			".vscode/remix.code-snippets"
+		"includes": [
+			"**",
+			"!**/.react-router/**/*",
+			"!**/coverage*",
+			"!**/lib",
+			"!**/node_modules",
+			"!**/pnpm-lock.yaml",
+			"!**/*.snap",
+			"!**/build",
+			"!**/server-build",
+			"!**/test-results",
+			"!**/playwright-report",
+			"!**/app/components/ui/icons/name.d.ts",
+			"!**/.vscode/remix.code-snippets"
 		],
 		"ignoreUnknown": false
 	},
@@ -22,20 +23,21 @@
 		"bracketSpacing": true,
 		"enabled": true,
 		"formatWithErrors": false,
-		"ignore": [
-			"**/node_modules",
-			"./build",
-			"./public/build",
-			"./server-build",
-			"**/.env",
-			"./test-results/",
-			"./playwright-report/",
-			"./playwright/.cache/",
-			"./tests/fixtures/email/*.json",
-			"./coverage",
-			"./drizzle/migrations",
-			"**/package-lock.json",
-			".vscode/remix.code-snippets"
+		"includes": [
+			"**",
+			"!**/node_modules",
+			"!build",
+			"!public/build",
+			"!server-build",
+			"!**/.env",
+			"!test-results/",
+			"!playwright-report/",
+			"!playwright/.cache/",
+			"!tests/fixtures/email/**/*.json",
+			"!coverage",
+			"!drizzle/migrations",
+			"!**/package-lock.json",
+			"!**/.vscode/remix.code-snippets"
 		],
 		"indentStyle": "tab",
 		"indentWidth": 2,
@@ -52,23 +54,42 @@
 	},
 	"linter": {
 		"enabled": true,
-		"rules": { "recommended": true },
-		"ignore": [
-			".react-router/*",
-			"coverage*",
-			"lib",
-			"node_modules",
-			"pnpm-lock.yaml",
-			"**/*.snap",
-			"build",
-			"server-build",
-			"test-results",
-			"playwright-report",
-			"app/components/ui/icons/name.d.ts"
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noEmptyPattern": "off",
+				"useUniqueElementIds": "off"
+			},
+			"a11y": {
+				"noSvgWithoutTitle": "off",
+				"noStaticElementInteractions": "off",
+				"useSemanticElements": "off",
+				"useAriaPropsSupportedByRole": "off"
+			},
+			"suspicious": {
+				"noUnknownAtRules": "off"
+			}
+		},
+		"includes": [
+			"**",
+			"!**/.react-router/**/*",
+			"!**/coverage*",
+			"!**/lib",
+			"!**/node_modules",
+			"!**/pnpm-lock.yaml",
+			"!**/*.snap",
+			"!**/build",
+			"!**/server-build",
+			"!**/test-results",
+			"!**/playwright-report",
+			"!**/app/components/ui/icons/name.d.ts"
 		]
 	},
-	"organizeImports": { "enabled": true },
-	"overrides": [{ "include": [".nvmrc"] }, { "include": [".nvmrc"] }],
+	"assist": { "actions": { "source": { "organizeImports": "off" } } },
+	"overrides": [
+		{ "includes": ["**/.nvmrc/**"] },
+		{ "includes": ["**/.nvmrc/**"] }
+	],
 	"vcs": {
 		"clientKind": "git",
 		"defaultBranch": "main",

@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
 import { Button } from '#app/components/ui/button.js'
+import { useEffect, useRef, useState } from 'react'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -14,18 +14,14 @@ export enum ModeType {
 }
 
 export function PrdModeSection({
-	prdId,
 	mode,
 	setMode,
-	isEditor,
 }: {
-	prdId: string
 	mode: ModeType
 	setMode: (mode: ModeType) => void
-	isEditor: boolean
 }) {
-	const linkRef = useRef<HTMLInputElement>(null)
-	const [link, setLink] = useState<string>('editing')
+	const _linkRef = useRef<HTMLInputElement>(null)
+	const [_link, setLink] = useState<string>('editing')
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {

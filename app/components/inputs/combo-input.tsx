@@ -1,9 +1,9 @@
 import type { Item } from '#app/utils/misc'
-import {
-	type ManyToManyRelations,
-	getMTMRelations,
-} from '#app/utils/modelUtils'
 import { models } from '#app/utils/models'
+import {
+	getMTMRelations,
+	type ManyToManyRelations,
+} from '#app/utils/modelUtils'
 import { ComboConform } from './combo-conform'
 
 export function ComboInput<T extends keyof typeof models>({

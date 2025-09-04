@@ -108,7 +108,7 @@ export const standardFields = {
 }
 
 export function tenantIdIndex(
-	name: string,
+	_name: string,
 	table: Record<string, AnyPgColumn>,
 ) {
 	if (!('tenantId' in table) || !('id' in table)) {

@@ -1,10 +1,10 @@
-import crypto from 'node:crypto'
-import { PassThrough } from 'node:stream'
-import { styleText } from 'node:util'
 import { contentSecurity } from '@nichtsam/helmet/content'
 import { createReadableStreamFromReadable } from '@react-router/node'
 import * as Sentry from '@sentry/react-router'
 import { isbot } from 'isbot'
+import crypto from 'node:crypto'
+import { PassThrough } from 'node:stream'
+import { styleText } from 'node:util'
 import { renderToPipeableStream } from 'react-dom/server'
 import {
 	type ActionFunctionArgs,
@@ -40,7 +40,7 @@ export default async function handleRequest(...args: DocRequestArgs) {
 		: 'onShellReady'
 
 	const nonce = crypto.randomBytes(16).toString('hex')
-	// biome-ignore lint/suspicious/noAsyncPromiseExecutor: <explanation>
+	// biome-ignore lint/suspicious/noAsyncPromiseExecutor: misc
 	return new Promise(async (resolve, reject) => {
 		let didError = false
 		// NOTE: this timing will only include things that are rendered in the shell

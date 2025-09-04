@@ -23,7 +23,7 @@ export async function getPermissions({
 	// if (!user.internal) {
 	// 	throw new Error('User is not internal')
 	// }
-	const objectIdFilter = eq(permission[models[modelName].idFieldName], id)
+	const _objectIdFilter = eq(permission[models[modelName].idFieldName], id)
 	const fieldName = models[modelName].idFieldName
 	const permissions = await db.query.permission.findMany({
 		where: {

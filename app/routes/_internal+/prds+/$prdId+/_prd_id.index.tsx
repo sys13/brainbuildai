@@ -38,6 +38,7 @@ import type {
 import getComments from '#app/utils/suggestions.server/get-comments'
 import getShareOptions from '#app/utils/suggestions.server/get-share'
 import type { Route } from './+types/_prd_id.index'
+
 const model = models.prd
 
 export const loader = async ({ params, request }: Route.LoaderArgs) => {
@@ -48,7 +49,7 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
 	const { prdId: id } = params
 	invariantResponse(id, 'Not found', { status: 404 })
 
-	const privileges = await requireAuthorization({
+	const _privileges = await requireAuthorization({
 		id,
 		modelName: model.name,
 		operation: 'read',
@@ -150,7 +151,7 @@ export default function Details({ loaderData }: Route.ComponentProps) {
 			})
 			.catch((err) => console.log('err', err))
 	}, [loadingIndex, obj])
-	const [hasDataSections, setHasDataSections] = useState<
+	const [_hasDataSections, setHasDataSections] = useState<
 		Record<(typeof sectionNames)[number], boolean>
 	>({
 		summary: false,

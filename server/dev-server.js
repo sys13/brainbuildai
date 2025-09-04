@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'production') {
 	const serverWatcher = watch(
 		'./server',
 		{ recursive: true },
-		(eventType, filename) => {
+		(_eventType, filename) => {
 			if (filename?.endsWith('.ts')) {
 				console.log(`📁 Server file changed: ${filename}`)
 				debouncedRecompile()
@@ -85,12 +85,15 @@ if (process.env.NODE_ENV === 'production') {
 	)
 
 	// Watch for changes in vite config
-	const viteConfigWatcher = watch('./vite.config.ts', (eventType, filename) => {
-		if (filename) {
-			console.log('⚙️  Vite config changed, restarting...')
-			debouncedRecompile()
-		}
-	})
+	const viteConfigWatcher = watch(
+		'./vite.config.ts',
+		(_eventType, filename) => {
+			if (filename) {
+				console.log('⚙️  Vite config changed, restarting...')
+				debouncedRecompile()
+			}
+		},
+	)
 
 	// Cleanup on exit
 	process.on('SIGINT', () => {

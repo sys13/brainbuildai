@@ -1,4 +1,7 @@
+import React from 'react'
+import { Await } from 'react-router'
 import type { sectionNames } from '#app/routes/_internal+/prds+/$prdId+/_prd_id.index'
+import { BackgroundInfoSection } from '#app/routes/resources+/prd-background-info.js'
 import { ContextSection } from '#app/routes/resources+/prd-context'
 import { DesignSection } from '#app/routes/resources+/prd-design'
 import { FeaturesSection } from '#app/routes/resources+/prd-features'
@@ -9,6 +12,7 @@ import { RisksSection } from '#app/routes/resources+/prd-risks'
 import { StoriesSection } from '#app/routes/resources+/prd-stories'
 import { SuccessCriteriaSection } from '#app/routes/resources+/prd-success-criteria'
 import { SummarySection } from '#app/routes/resources+/prd-summary'
+import { TicketsSection } from '#app/routes/resources+/prd-tickets'
 import { UserInterviewSection } from '#app/routes/resources+/prd-user-interviews.js'
 import type {
 	ContextFileClient,
@@ -23,11 +27,6 @@ import type {
 	CommentProps,
 	ExtendedCommentProps,
 } from '#app/utils/suggestions.server/get-comments.js'
-
-import React from 'react'
-import { Await } from 'react-router'
-import { BackgroundInfoSection } from '#app/routes/resources+/prd-background-info.js'
-import { TicketsSection } from '#app/routes/resources+/prd-tickets'
 import { Icon } from '../ui/icon'
 import { PrdComment } from './prd-comment'
 export interface PrdPersonaProps {

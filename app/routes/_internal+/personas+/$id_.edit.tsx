@@ -1,17 +1,17 @@
-import type { LoaderFunctionArgs } from 'react-router'
-import { useLoaderData } from 'react-router'
 import { Heading } from '#app/components/heading'
 import { reqAuthAndGetPermissions } from '#app/models/authorization.server'
 import { getUser, requireInternalUser } from '#app/utils/auth.server'
 import { db } from '#app/utils/db.server'
 import { invariantResponse } from '#app/utils/misc'
 import ObjErrorBoundary from '#app/utils/objErrorBoundary'
+import type { LoaderFunctionArgs } from 'react-router'
+import { useLoaderData } from 'react-router'
 import { Editor, model } from './__editor'
 
 export { action } from './__editor.server'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
-	const { id: userId, tenantId } = await requireInternalUser(request)
+	const { tenantId } = await requireInternalUser(request)
 	const user = await getUser(request)
 
 	if (!user) {

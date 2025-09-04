@@ -18,7 +18,7 @@ const schema = z.object({
 	prdId: z.string(),
 })
 
-const model = models.prdPersona
+const _model = models.prdPersona
 
 export async function action({ request }: Route.ActionArgs) {
 	const { tenantId } = await requireInternalUser(request)
@@ -54,7 +54,7 @@ export function PersonasSection({
 		setInputValue(e.target.value)
 	}
 
-	const buttonRef = React.useRef<HTMLButtonElement>(null)
+	const _buttonRef = React.useRef<HTMLButtonElement>(null)
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 		submit(e.currentTarget as HTMLFormElement, {
@@ -81,7 +81,7 @@ export function PersonasSection({
 	}, [personas])
 	const lastResult = useActionData<typeof action>()
 	const submit = useDebounceSubmit()
-	const [form, fields] = useForm({
+	const [form, _fields] = useForm({
 		constraint: getZodConstraint(schema),
 		id: 'personas-section',
 		lastResult,

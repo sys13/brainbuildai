@@ -4,9 +4,9 @@ import { and, eq } from 'drizzle-orm'
 import * as QRCode from 'qrcode'
 import {
 	type ActionFunctionArgs,
+	data,
 	Form,
 	type LoaderFunctionArgs,
-	data,
 	redirect,
 	useActionData,
 	useLoaderData,

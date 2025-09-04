@@ -1,7 +1,7 @@
-import { Link, useSubmit } from 'react-router'
 import { cn } from '#app/utils/misc'
 import { models } from '#app/utils/models'
 import type { ExistingAndSuggestedClient } from '#app/utils/sort-objs'
+import { Link, useSubmit } from 'react-router'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import { Icon } from './ui/icon'
@@ -22,7 +22,6 @@ export function SuggestedItem({
 	item,
 	linkToDetails,
 	objType,
-	prdId,
 	onAccept,
 }: {
 	getBadgeTextFromObj?: (obj: unknown) => string
@@ -33,7 +32,7 @@ export function SuggestedItem({
 	prdId?: string
 	onAccept?: (item: ExistingAndSuggestedClient) => void
 }) {
-	const submit = useSubmit()
+	const _submit = useSubmit()
 	const model = models[objType]
 	return (
 		<li

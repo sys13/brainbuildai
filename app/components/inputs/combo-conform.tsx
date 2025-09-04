@@ -5,7 +5,7 @@ import {
 import { type ComponentProps, type ElementRef, useRef } from 'react'
 import { useSearchParams } from 'react-router'
 import type { Select, SelectTrigger } from '#app/components/ui/select'
-import { type Item, cn } from '#app/utils/misc'
+import { cn, type Item } from '#app/utils/misc'
 import { compact } from '#app/utils/ts-utils'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'

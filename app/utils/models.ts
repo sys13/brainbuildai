@@ -3,8 +3,8 @@ import { feature } from '#db/schema/feature'
 import { goal } from '#db/schema/goal'
 import { persona } from '#db/schema/persona'
 import { prd } from '#db/schema/prd'
-import { prdPersona } from '#db/schema/prdPersona.js'
 import { prdUserInterview } from '#db/schema/prd_user_interview'
+import { prdPersona } from '#db/schema/prdPersona.js'
 import { problem } from '#db/schema/problem'
 import { product } from '#db/schema/product'
 import { risk } from '#db/schema/risk'
@@ -17,8 +17,8 @@ import { ticket } from '#db/schema/ticket'
 import { userInterview } from '#db/schema/userInterview.js'
 import type { modelNames } from './modelNames'
 import {
-	type Model,
 	genProps,
+	type Model,
 	schemas,
 	ticketSchema,
 	userInterviewSchema,
