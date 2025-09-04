@@ -1,7 +1,7 @@
-import type { MetaFunction } from '@remix-run/node'
-import { useEffect, useState } from 'react'
 import { Container } from '#app/components/container'
 import { Spacer } from '#app/components/spacer'
+import { useEffect, useState } from 'react'
+import type { MetaFunction } from 'react-router'
 
 export const meta: MetaFunction = () => {
 	return [
