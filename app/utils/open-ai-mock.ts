@@ -20,19 +20,19 @@ export async function getOpenAIStructuredOutputs<
 	input: string,
 	schema: T,
 	name: Parameters<typeof zodResponseFormat>[1],
-): Promise<null | z.output<T>> {
+): Promise<null | z.infer<T>> {
 	if (process.env.MOCK_AI === 'true') {
 		if (name === 'painInfo') {
 			return [
 				{ pains: ['aa', 'bb', 'cc'], personaName: 'a' },
 				{ pains: ['aa', 'bb', 'cc'], personaName: 'b' },
-			] as z.output<T>
+			]
 		}
 		if (name === 'modelNames') {
-			return ['user', 'user_profile'] as z.output<T>
+			return ['user', 'user_profile']
 		}
 		if (name === 'summary') {
-			return 'AI-generated summary' as z.output<T>
+			return 'AI-generated summary'
 		}
 		if (name === 'spamDetection') {
 			// Mock spam detection based on simple patterns
@@ -52,9 +52,9 @@ export async function getOpenAIStructuredOutputs<
 				isSpam,
 				confidence: isSpam ? 0.9 : 0.1,
 				reason: isSpam ? 'Contains suspicious patterns' : null,
-			} as z.output<T>
+			}
 		}
-		return ['a', 'b', 'c', 'd', 'e', 'f'] as z.output<T>
+		return ['a', 'b', 'c', 'd', 'e', 'f']
 	}
 	let retryCount = 0
 	const maxRetries = 5
@@ -85,7 +85,7 @@ export async function getOpenAIStructuredOutputs<
 			})
 
 			if (response.output_parsed) {
-				return response.output_parsed[name] as z.output<T> | null
+				return response.output_parsed[name]
 			}
 
 			return null
