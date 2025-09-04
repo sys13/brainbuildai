@@ -252,7 +252,7 @@ export function useDelayedIsPending({
 function callAll<Args extends unknown[]>(
 	...fns: (((...args: Args) => unknown) | undefined)[]
 ) {
-	// biome-ignore lint/complexity/noForEach: <explanation>
+	// biome-ignore lint/suspicious/useIterableCallbackReturn: misc
 	return (...args: Args) => fns.forEach((fn) => fn?.(...args))
 }
 

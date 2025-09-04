@@ -1,7 +1,7 @@
-import { fakerEN } from '@faker-js/faker'
-import type { PgTable } from 'drizzle-orm/pg-core'
 import { db } from '#app/utils/db.server'
 import type { models } from '#app/utils/models'
+import { fakerEN } from '@faker-js/faker'
+import type { PgTable } from 'drizzle-orm/pg-core'
 
 export function getCreatedUpdated() {
 	const createdAt = fakerEN.date.past()
@@ -30,9 +30,7 @@ export function createRandomPairs<T>(
 	const resultPairs: [T, T][] = []
 
 	// Create a pool of all possible pairs
-	// biome-ignore lint/complexity/noForEach: <explanation>
 	array1.forEach((item1) => {
-		// biome-ignore lint/complexity/noForEach: <explanation>
 		array2.forEach((item2) => {
 			pairPool.push([item1, item2])
 		})

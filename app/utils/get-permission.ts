@@ -11,11 +11,9 @@ interface PermissionProps {
 }
 
 export default async function getPermission({
-	entity,
 	id,
 	user: currentUser,
 }: {
-	entity?: string
 	id: string
 	user: TenantUser
 }): Promise<PermissionProps> {

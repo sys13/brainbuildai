@@ -1,6 +1,3 @@
-import { invariant } from '@epic-web/invariant'
-import { and, eq } from 'drizzle-orm'
-import { z } from 'zod'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
@@ -8,6 +5,9 @@ import type { ExistingAndSuggested } from '#app/utils/types'
 import type { TenantUser } from '#app/utils/user'
 import { tenant } from '#db/schema/base.js'
 import { goal } from '#db/schema/goal.js'
+import { invariant } from '@epic-web/invariant'
+import { and, eq } from 'drizzle-orm'
+import { z } from 'zod'
 import { getAcceptedOrAll } from '../modelUtils'
 
 export default async function getGoals({
@@ -21,7 +21,7 @@ export default async function getGoals({
 	user: TenantUser
 	regenerate?: boolean
 }): Promise<ExistingAndSuggested[]> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})

@@ -1,12 +1,12 @@
-import { invariant } from '@epic-web/invariant'
-import { and, eq } from 'drizzle-orm'
-import { z } from 'zod'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
 import type { ExistingAndSuggested } from '#app/utils/types'
 import type { TenantUser } from '#app/utils/user'
 import { feature } from '#db/schema/feature'
+import { invariant } from '@epic-web/invariant'
+import { and, eq } from 'drizzle-orm'
+import { z } from 'zod'
 import { getAcceptedOrAll } from '../modelUtils'
 
 export default async function getFeatures({
@@ -20,7 +20,7 @@ export default async function getFeatures({
 	user: TenantUser
 	regenerate?: boolean
 }): Promise<ExistingAndSuggested[]> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})
@@ -118,20 +118,4 @@ export default async function getFeatures({
 	})
 
 	return [...existingFeatures, ...results]
-}
-
-export async function getFeaturesFromOpenAI({
-	prdName,
-	tenantDescription,
-	goals,
-	successCriteria,
-	problems,
-}: {
-	prdName: string
-	tenantDescription: string | null
-	goals: string[]
-	successCriteria: string[]
-	problems: string[]
-}) {
-	return
 }

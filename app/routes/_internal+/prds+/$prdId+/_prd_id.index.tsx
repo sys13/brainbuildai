@@ -1,5 +1,3 @@
-import { invariantResponse } from '@epic-web/invariant'
-import { useEffect, useState } from 'react'
 import { AIInstructionsModal } from '#app/components/ai-Instructions-modal.js'
 import { Heading } from '#app/components/heading'
 import {
@@ -37,6 +35,8 @@ import type {
 } from '#app/utils/sort-objs.js'
 import getComments from '#app/utils/suggestions.server/get-comments'
 import getShareOptions from '#app/utils/suggestions.server/get-share'
+import { invariantResponse } from '@epic-web/invariant'
+import { useEffect, useState } from 'react'
 import type { Route } from './+types/_prd_id.index'
 
 const model = models.prd
@@ -228,15 +228,10 @@ export default function Details({ loaderData }: Route.ComponentProps) {
 												name={obj.name}
 												shareOptions={share as ShareOptionsProps}
 											/>
-											<PrdExport prdId={obj.id} data={data} name={obj.name} />
+											<PrdExport data={data} name={obj.name} />
 										</div>
 									)}
-									<PrdModeSection
-										prdId={obj.id}
-										mode={mode}
-										setMode={setMode}
-										isEditor={isEditor}
-									/>
+									<PrdModeSection mode={mode} setMode={setMode} />
 								</div>
 							}
 							type="details"

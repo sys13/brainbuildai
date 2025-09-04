@@ -1,3 +1,8 @@
+import { RichTextField } from '#app/components/forms'
+import { requireInternalUser } from '#app/utils/auth.server'
+import { db } from '#app/utils/db.server'
+import type { ExistingClient } from '#app/utils/sort-objs'
+import { backgroundInfo } from '#db/schema/backgroundInfo'
 import { getFormProps, useForm } from '@conform-to/react'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import { useRef, useState } from 'react'
@@ -6,11 +11,6 @@ import { data, Form, useActionData } from 'react-router'
 import rehypeRaw from 'rehype-raw'
 import { useDebounceSubmit } from 'remix-utils/use-debounce-submit'
 import { z } from 'zod'
-import { RichTextField } from '#app/components/forms'
-import { requireInternalUser } from '#app/utils/auth.server'
-import { db } from '#app/utils/db.server'
-import type { ExistingClient } from '#app/utils/sort-objs'
-import { backgroundInfo } from '#db/schema/backgroundInfo'
 import type { Route } from './+types/prd-background-info'
 
 const schema = z.object({
@@ -22,7 +22,7 @@ type ActionResponse =
 	| { status: 'success'; value: { textDump: string } }
 	| { status: 'error'; errors: Record<string, string[]> }
 export async function action({ request }: Route.ActionArgs) {
-	const { tenantId, id } = await requireInternalUser(request)
+	const { tenantId } = await requireInternalUser(request)
 	const formData = await request.formData()
 	const result = parseWithZod(formData, { schema })
 

@@ -1,6 +1,6 @@
+import type { IconName } from '#app/components/ui/icon'
 import type { PgTable } from 'drizzle-orm/pg-core'
 import { z } from 'zod'
-import type { IconName } from '#app/components/ui/icon'
 import type { db } from './db.server'
 import type { modelNames } from './modelNames'
 import type { models } from './models'
@@ -108,7 +108,7 @@ export type Model<T extends (typeof modelNames)[number]> = {
 	idListFieldName: `${T}Ids`
 	name: T
 	relations: Partial<Record<ModelName, GenRelationsProps>>
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: misc
 	schema: z.ZodObject<any, any>
 	schemaKey: T
 	starable?: boolean

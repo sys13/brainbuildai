@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { useSearchParams, useSubmit } from 'react-router'
 import type { models } from '#app/utils/models'
 import {
 	type ExistingAndSuggestedClient,
 	sortByAccepted,
 } from '#app/utils/sort-objs'
+import React, { useState } from 'react'
+import { useSearchParams, useSubmit } from 'react-router'
 import { ListViewItem } from './list-view-input'
 import { SuggestedItem } from './suggested-item'
 import { Button } from './ui/button'
@@ -122,7 +122,6 @@ export function ListView({
 								key={item.id}
 								linkToDetails
 								model={model}
-								prdId={prdId}
 							/>
 						))}
 				</ul>

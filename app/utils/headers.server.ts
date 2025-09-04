@@ -88,7 +88,7 @@ export function getConservativeCacheControl(
 					switch (typeof currentValue) {
 						case 'boolean': {
 							if (currentValue) {
-								// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+								// biome-ignore lint/suspicious/noExplicitAny: misc
 								acc[directive] = true as any
 							}
 
@@ -98,11 +98,11 @@ export function getConservativeCacheControl(
 							const accValue = acc[directive] as number | undefined
 
 							if (accValue === undefined) {
-								// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+								// biome-ignore lint/suspicious/noExplicitAny: misc
 								acc[directive] = currentValue as any
 							} else {
 								const result = Math.min(accValue, currentValue)
-								// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+								// biome-ignore lint/suspicious/noExplicitAny: misc
 								acc[directive] = result as any
 							}
 

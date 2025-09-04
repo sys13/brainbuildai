@@ -1,10 +1,10 @@
+import { db } from '#app/utils/db.server'
+import { sendEmail } from '#app/utils/email.server'
+import { tenant } from '#db/schema/base'
 import { invariantResponse } from '@epic-web/invariant'
 import { eq } from 'drizzle-orm'
 import type { ActionFunctionArgs } from 'react-router'
 import stripe from 'stripe'
-import { db } from '#app/utils/db.server'
-import { sendEmail } from '#app/utils/email.server'
-import { tenant } from '#db/schema/base'
 
 const STRIPE = new stripe(process.env.STRIPE_SECRET_KEY as string)
 const INFO_EMAIL_ADDRESS = 'daniel@brainbuildai.com'
@@ -29,7 +29,7 @@ export async function action({ request }: ActionFunctionArgs) {
 		endpointSecret,
 	)
 
-	// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+	// biome-ignore lint/suspicious/noImplicitAnyLet: misc
 	let subscription
 
 	// let status

@@ -11,9 +11,6 @@ import { job } from '#db/schema/job.js'
 const schema = z.object({
 	companyWebsite: z.string().optional(),
 })
-type ActionResponse =
-	| { status: 'success' }
-	| { status: 'error'; errors: Record<string, string[]> }
 export async function action({ request }: { request: Request }) {
 	const { tenantId } = await requireInternalUser(request)
 	const formData = await request.formData()

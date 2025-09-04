@@ -1,7 +1,7 @@
-import { fakerEN } from '@faker-js/faker'
 import { expect, test } from '#tests/playwright-utils'
+import { fakerEN } from '@faker-js/faker'
 
-test('admin user has admin role', async ({ insertNewUser, page }) => {
+test('admin user has admin role', async ({ insertNewUser }) => {
 	// Create an admin user
 	const password = fakerEN.internet.password()
 	const adminUser = await insertNewUser({
@@ -17,7 +17,7 @@ test('admin user has admin role', async ({ insertNewUser, page }) => {
 	expect(adminUser.id).toBeDefined()
 })
 
-test('regular user has user role', async ({ insertNewUser, page }) => {
+test('regular user has user role', async ({ insertNewUser }) => {
 	// Create a regular (non-admin) user
 	const password = fakerEN.internet.password()
 	const regularUser = await insertNewUser({
@@ -38,7 +38,6 @@ test('regular user has user role', async ({ insertNewUser, page }) => {
 test.skip('user can only see their own data', async ({
 	insertNewUser,
 	page,
-	browser,
 }) => {
 	// Create two users
 	const password1 = fakerEN.internet.password()

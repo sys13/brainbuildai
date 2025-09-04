@@ -1,13 +1,13 @@
-import { parseWithZod } from '@conform-to/zod'
-import { invariantResponse } from '@epic-web/invariant'
-import { data } from 'react-router'
-import { z } from 'zod'
 import { OptimisticItemSection } from '#app/components/prd/optimistic-item-section.js'
 import { getUser, requireInternalUser } from '#app/utils/auth.server'
 import { models } from '#app/utils/models'
 import type { ExistingAndSuggestedClient } from '#app/utils/sort-objs'
 import getGoals from '#app/utils/suggestions.server/get-goals.js'
 import { createToastHeaders } from '#app/utils/toast.server.js'
+import { parseWithZod } from '@conform-to/zod'
+import { invariantResponse } from '@epic-web/invariant'
+import { data } from 'react-router'
+import { z } from 'zod'
 import type { Route } from './+types/prd-personas'
 
 const schema = z.object({
@@ -18,7 +18,7 @@ const schema = z.object({
 const model = models.goal
 
 export async function action({ request }: Route.ActionArgs) {
-	const { tenantId } = await requireInternalUser(request)
+	await requireInternalUser(request)
 	const user = await getUser(request)
 	invariantResponse(user, 'Not found', { status: 403 })
 	const formData = await request.formData()
@@ -47,7 +47,6 @@ export async function action({ request }: Route.ActionArgs) {
 
 export function GoalsSection({
 	prdId,
-	goals,
 	prdGoals,
 	isEditor,
 }: {

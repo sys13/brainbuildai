@@ -1,4 +1,3 @@
-import { styleText } from 'node:util'
 import { helmet } from '@nichtsam/helmet/node-http'
 import { createRequestHandler } from '@react-router/express'
 import * as Sentry from '@sentry/react-router'
@@ -9,6 +8,7 @@ import express from 'express'
 import rateLimit from 'express-rate-limit'
 import getPort, { portNumbers } from 'get-port'
 import morgan from 'morgan'
+import { styleText } from 'node:util'
 import type { ServerBuild } from 'react-router'
 
 const MODE = process.env.NODE_ENV ?? 'development'
@@ -196,8 +196,7 @@ async function getBuild() {
 	try {
 		const build = viteDevServer
 			? await viteDevServer.ssrLoadModule('virtual:react-router/server-build')
-			: // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-expect-error it is okay
+			: // @ts-ignore-error
 				await import('../build/server/index.js')
 
 		return { build: build as unknown as ServerBuild, error: null }

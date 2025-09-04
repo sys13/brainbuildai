@@ -196,7 +196,7 @@ function Document({
 			<body className="bg-background text-foreground">
 				{children}
 				<script
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: setting env
 					dangerouslySetInnerHTML={{
 						__html: `window.ENV = ${JSON.stringify(env)}`,
 					}}

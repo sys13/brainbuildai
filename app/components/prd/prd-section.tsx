@@ -84,18 +84,6 @@ export function PRDSection<K extends keyof SectionsData>({
 				/>
 			)
 			break
-		// case 'context': {
-		// 	const { context: contextData, files } = data
-		// 	SectionComponent = (
-		// 		<ContextSection
-		// 			prdId={prdId}
-		// 			context={contextData}
-		// 			files={files}
-		// 			isEditor={isEditor}
-		// 		/>
-		// 	)
-		// 	break
-		// }
 		case 'background_info':
 			SectionComponent = (
 				<BackgroundInfoSection
@@ -144,7 +132,6 @@ export function PRDSection<K extends keyof SectionsData>({
 			SectionComponent = (
 				<StoriesSection
 					stories={data as ExistingAndSuggestedClient[]}
-					prdStories={data as ExistingAndSuggestedClient[]}
 					prdId={prdId}
 					isEditor={isEditor}
 				/>
@@ -154,7 +141,6 @@ export function PRDSection<K extends keyof SectionsData>({
 			SectionComponent = (
 				<RisksSection
 					risks={data as ExistingAndSuggestedClient[]}
-					prdRisks={data as ExistingAndSuggestedClient[]}
 					prdId={prdId}
 					isEditor={isEditor}
 				/>
@@ -186,7 +172,6 @@ export function PRDSection<K extends keyof SectionsData>({
 		case 'success_criteria':
 			SectionComponent = (
 				<SuccessCriteriaSection
-					successCriteria={data as ExistingAndSuggestedClient[]}
 					prdSuccessCriteria={data as ExistingAndSuggestedClient[]}
 					prdId={prdId}
 					isEditor={isEditor}
@@ -196,7 +181,6 @@ export function PRDSection<K extends keyof SectionsData>({
 		case 'features':
 			SectionComponent = (
 				<FeaturesSection
-					features={data as ExistingAndSuggestedClient[]}
 					prdFeatures={data as ExistingAndSuggestedClient[]}
 					prdId={prdId}
 					isEditor={isEditor}
@@ -221,183 +205,6 @@ export function PRDSection<K extends keyof SectionsData>({
 		default:
 			SectionComponent = null
 	}
-
-	// const Section = (
-	// 	<React.Suspense fallback={showLoader ? <div>Loading</div> : null}>
-	// 		<Await
-	// 			resolve={
-	// 				name === 'summary'
-	// 					? summary
-	// 					: name === 'context'
-	// 						? context
-	// 						: name === 'personas'
-	// 							? personas
-	// 							: name === 'goals'
-	// 								? goals
-	// 								: name === 'stories'
-	// 									? stories
-	// 									: name === 'risks'
-	// 										? risks
-	// 										: name === 'problems'
-	// 											? problems
-	// 											: name === 'success_criteria'
-	// 												? success_criteria
-	// 												: name === 'features'
-	// 													? features
-	// 													: name === 'user_interviews'
-	// 														? userInterviews
-	// 														: name === 'designs'
-	// 															? designs
-	// 															: name === 'tickets'
-	// 																? tickets
-	// 																: name === 'background_info'
-	// 																	? backgroundInfo
-	// 																	: []
-	// 			}
-	// 		>
-	// 			{(value) => {
-	// 				switch (name) {
-	// 					case 'summary':
-	// 						return (
-	// 							<SummarySection
-	// 								prdId={prdId}
-	// 								summary={value as ExistingClient}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'context': {
-	// 						const { context: contextData, files } = value as {
-	// 							context: ExistingClient
-	// 							files: ContextFileClient[]
-	// 						}
-	// 						return (
-	// 							<ContextSection
-	// 								prdId={prdId}
-	// 								context={contextData}
-	// 								files={files}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					}
-	// 					case 'background_info': {
-	// 						return (
-	// 							<BackgroundInfoSection
-	// 								prdId={prdId}
-	// 								backgroundInfo={value as ExistingClient}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					}
-	// 					case 'personas':
-	// 						return (
-	// 							<PersonasSection
-	// 								personas={(value as PersonasProps).personas}
-	// 								prdPersonas={(value as PersonasProps).prdPersonas}
-	// 								prdId={prdId}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'user_interviews':
-	// 						return (
-	// 							<UserInterviewSection
-	// 								userInterviews={
-	// 									(value as ExistingUserInterviewProps).userInterviews
-	// 								}
-	// 								prdId={prdId}
-	// 								prdUserInterviews={
-	// 									(value as ExistingUserInterviewProps).prdUserInterviews
-	// 								}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'goals':
-	// 						return (
-	// 							<GoalsSection
-	// 								goals={value as ExistingAndSuggestedClient[]}
-	// 								prdId={prdId}
-	// 								prdGoals={value as ExistingAndSuggestedClient[]}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'stories':
-	// 						return (
-	// 							<StoriesSection
-	// 								stories={value as ExistingAndSuggestedClient[]}
-	// 								prdId={prdId}
-	// 								prdStories={value as ExistingAndSuggestedClient[]}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'risks':
-	// 						return (
-	// 							<RisksSection
-	// 								risks={value as ExistingAndSuggestedClient[]}
-	// 								prdId={prdId}
-	// 								prdRisks={value as ExistingAndSuggestedClient[]}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'designs':
-	// 						return (
-	// 							<DesignSection
-	// 								designs={
-	// 									value as {
-	// 										links: DesignLinkClient[]
-	// 										images: DesignImageClient[]
-	// 									}
-	// 								}
-	// 								prdId={prdId}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'problems':
-	// 						return (
-	// 							<ProblemsSection
-	// 								problems={value as ExistingAndSuggestedClient[]}
-	// 								prdId={prdId}
-	// 								prdProblems={value as ExistingAndSuggestedClient[]}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'success_criteria':
-	// 						return (
-	// 							<SuccessCriteriaSection
-	// 								successCriteria={value as ExistingAndSuggestedClient[]}
-	// 								prdId={prdId}
-	// 								prdSuccessCriteria={value as ExistingAndSuggestedClient[]}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'features':
-	// 						return (
-	// 							<FeaturesSection
-	// 								features={value as ExistingAndSuggestedClient[]}
-	// 								prdId={prdId}
-	// 								prdFeatures={value as ExistingAndSuggestedClient[]}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					case 'tickets': {
-	// 						return (
-	// 							<TicketsSection
-	// 								ticketData={
-	// 									value as {
-	// 										tickets: ExistingAndSuggestedClient[]
-	// 										integrationConfig: IntegrationConfigClient
-	// 									}
-	// 								}
-	// 								prdId={prdId}
-	// 								isEditor={isEditor}
-	// 							/>
-	// 						)
-	// 					}
-	// 					default:
-	// 						return null
-	// 				}
-	// 			}}
-	// 		</Await>
-	// 	</React.Suspense>
-	// )
 
 	return (
 		<div className="relative">

@@ -1,9 +1,9 @@
+import { cn, type Item } from '#app/utils/misc'
 import {
 	type FieldMetadata,
 	unstable_useControl as useControl,
 } from '@conform-to/react'
 import * as React from 'react'
-import { cn, type Item } from '#app/utils/misc'
 import { Button } from '../ui/button'
 import {
 	Command,
@@ -55,7 +55,6 @@ export function ComboboxSingle({
 					<Button
 						aria-expanded={open}
 						className="w-[200px] justify-between"
-						// biome-ignore lint/a11y/useSemanticElements: <explanation>
 						role="combobox"
 						variant="outline"
 					>

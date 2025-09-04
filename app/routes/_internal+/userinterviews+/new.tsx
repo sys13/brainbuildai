@@ -1,5 +1,3 @@
-import type { LoaderFunctionArgs } from 'react-router'
-import { useLoaderData } from 'react-router'
 import { Heading } from '#app/components/heading'
 import { requireInternalUser } from '#app/utils/auth.server'
 import { db } from '#app/utils/db.server'
@@ -8,11 +6,13 @@ import {
 	getDefaultValuesFromSearchParams,
 } from '#app/utils/newUtils.server'
 import ObjErrorBoundary from '#app/utils/objErrorBoundary'
+import type { LoaderFunctionArgs } from 'react-router'
+import { useLoaderData } from 'react-router'
 import { Editor, model } from './__editor'
 
 export { action } from './__editor.server'
 
-export async function loader({ params, request }: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
 	const user = await requireInternalUser(request)
 	const searchParams = new URL(request.url).searchParams
 	const prdId = searchParams.get('prdId') ?? ''

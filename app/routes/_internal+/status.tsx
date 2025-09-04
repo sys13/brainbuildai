@@ -1,9 +1,9 @@
-import React from 'react'
-import { redirect, useFetcher } from 'react-router'
 import { Icon } from '#app/components/ui/icon'
 import { requireInternalUser } from '#app/utils/auth.server'
 import { db } from '#app/utils/db.server'
 import { tenant } from '#db/schema/base'
+import React from 'react'
+import { redirect, useFetcher } from 'react-router'
 import type { Route } from './+types/status'
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -57,10 +57,7 @@ export async function action({ request }: Route.ActionArgs) {
 	return { jobStatus: job?.status }
 }
 
-export default function Status({
-	loaderData,
-	actionData,
-}: Route.ComponentProps) {
+export default function Status({ actionData }: Route.ComponentProps) {
 	// const {} = loaderData
 
 	const fetcher = useFetcher<typeof actionData>()

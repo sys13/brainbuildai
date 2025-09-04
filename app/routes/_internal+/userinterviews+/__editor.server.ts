@@ -1,13 +1,13 @@
-import { parseWithZod } from '@conform-to/zod'
-import { eq } from 'drizzle-orm'
-import type { ActionFunctionArgs } from 'react-router'
-import { z } from 'zod'
 import { filterByIdAndOwner } from '#app/models/sqlUtils.server'
 import { requireInternalUser } from '#app/utils/auth.server'
 import { db } from '#app/utils/db.server'
 import getUserInterviewAiSummary from '#app/utils/suggestions.server/get-interview-summary.js'
 import { redirectWithToast } from '#app/utils/toast.server'
 import { prdUserInterview } from '#db/schema/prd_user_interview.js'
+import { parseWithZod } from '@conform-to/zod'
+import { eq } from 'drizzle-orm'
+import type { ActionFunctionArgs } from 'react-router'
+import { z } from 'zod'
 import { model, schema } from './__editor'
 
 const tableSchema = model.drizzleSchema
@@ -19,7 +19,7 @@ export const withCols = {
 	// },
 } as const
 
-export async function action({ params, request }: ActionFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
 	const { id: userId, tenantId } = await requireInternalUser(request)
 	const formData = await request.formData()
 

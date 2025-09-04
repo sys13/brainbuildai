@@ -1,6 +1,3 @@
-import { Suspense } from 'react'
-import type { LoaderFunctionArgs } from 'react-router'
-import { Await, useLoaderData } from 'react-router'
 import { Heading } from '#app/components/heading'
 import { PrdListView } from '#app/components/prd-list-view.js'
 import { Spacer } from '#app/components/spacer'
@@ -12,10 +9,13 @@ import { models } from '#app/utils/models'
 import { getAllRelationObjs } from '#app/utils/newUtils.server'
 import ObjErrorBoundary from '#app/utils/objErrorBoundary'
 import { getSearchParams } from '#app/utils/urls'
+import { Suspense } from 'react'
+import type { LoaderFunctionArgs } from 'react-router'
+import { Await, useLoaderData } from 'react-router'
 export const model = models.prd
 // const relationKeys = typedKeys(model.relations)
 
-export const loader = async ({ params, request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await requireInternalUser(request)
 
 	const searchParams = getSearchParams(request.url)

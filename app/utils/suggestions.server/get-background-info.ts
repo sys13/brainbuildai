@@ -1,20 +1,18 @@
-import { invariant } from '@epic-web/invariant'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import type { ExistingClient } from '#app/utils/sort-objs'
 import type { TenantUser } from '#app/utils/user'
+import { invariant } from '@epic-web/invariant'
 export default async function getBackgroundInfo({
-	moreSuggestions = 0,
 	prdId,
 	user,
-	force = false,
 }: {
 	moreSuggestions?: number
 	prdId: string
 	user: TenantUser
 	force?: boolean
 }): Promise<ExistingClient> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})

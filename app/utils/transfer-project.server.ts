@@ -1,6 +1,6 @@
+import { filterByPRD } from '#app/models/sqlUtils.server'
 import { eq, getTableColumns } from 'drizzle-orm'
 import type { PgTable, PgTransaction } from 'drizzle-orm/pg-core'
-import { filterByPRD } from '#app/models/sqlUtils.server'
 import { persona } from '../../db/schema/persona'
 // import { models } from './models'
 import { prd } from '../../db/schema/prd'
@@ -59,7 +59,7 @@ function updateSchema({
 	oldTenantId: string
 	prdId: string
 	schema: PgTable
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: misc
 	tx: PgTransaction<any, any, any>
 	userId: string
 }) {

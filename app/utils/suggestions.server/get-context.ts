@@ -1,13 +1,11 @@
-import { invariant } from '@epic-web/invariant'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import type { ContextFileClient, ExistingClient } from '#app/utils/sort-objs'
 import type { TenantUser } from '#app/utils/user'
+import { invariant } from '@epic-web/invariant'
 export default async function getContext({
-	moreSuggestions = 0,
 	prdId,
 	user,
-	force = false,
 }: {
 	moreSuggestions?: number
 	prdId: string
@@ -17,7 +15,7 @@ export default async function getContext({
 	context: ExistingClient
 	files: ContextFileClient[]
 }> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})

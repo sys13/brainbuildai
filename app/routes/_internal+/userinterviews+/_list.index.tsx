@@ -1,6 +1,3 @@
-import { Suspense } from 'react'
-import type { LoaderFunctionArgs } from 'react-router'
-import { Await, useLoaderData } from 'react-router'
 import { Heading } from '#app/components/heading'
 import { UserInterviewList } from '#app/components/interview-list-view'
 import { Spacer } from '#app/components/spacer'
@@ -11,11 +8,14 @@ import { decodeSearchString } from '#app/utils/misc'
 import { getAllRelationObjs } from '#app/utils/newUtils.server'
 import ObjErrorBoundary from '#app/utils/objErrorBoundary'
 import { getSearchParams } from '#app/utils/urls'
+import { Suspense } from 'react'
+import type { LoaderFunctionArgs } from 'react-router'
+import { Await, useLoaderData } from 'react-router'
 import { model } from './__editor'
 
 // const relationKeys = typedKeys(model.relations)
 
-export const loader = async ({ params, request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await requireInternalUser(request)
 
 	const searchParams = getSearchParams(request.url)
@@ -68,7 +68,7 @@ export default function ListPage() {
 			<Spacer size="4xs" />
 			<Suspense fallback={<Skeleton className="h-[100px] rounded-md" />}>
 				<Await resolve={objs}>
-					{(objs) => <UserInterviewList interviews={objs} model={model} />}
+					{(objs) => <UserInterviewList interviews={objs} />}
 				</Await>
 			</Suspense>
 		</div>

@@ -1,12 +1,12 @@
-import { invariant } from '@epic-web/invariant'
-import { and, eq } from 'drizzle-orm'
-import { z } from 'zod'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
 import type { ExistingAndSuggested } from '#app/utils/types'
 import type { TenantUser } from '#app/utils/user'
 import { problem } from '#db/schema/problem'
+import { invariant } from '@epic-web/invariant'
+import { and, eq } from 'drizzle-orm'
+import { z } from 'zod'
 
 export default async function getProblems({
 	moreSuggestions = 0,
@@ -20,7 +20,7 @@ export default async function getProblems({
 	regenerate?: boolean
 	autoAccept?: boolean
 }): Promise<ExistingAndSuggested[]> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})

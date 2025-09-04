@@ -1,9 +1,3 @@
-import { getFormProps, getInputProps, useForm } from '@conform-to/react'
-import { getZodConstraint, parseWithZod } from '@conform-to/zod'
-import { invariantResponse } from '@epic-web/invariant'
-import { useEffect, useRef, useState } from 'react'
-import { data, useFetcher } from 'react-router'
-import { z } from 'zod'
 import { Field, RichTextField } from '#app/components/forms'
 import { IntegrationModal } from '#app/components/integration-modal.js'
 import { ListViewItem } from '#app/components/list-view-input'
@@ -21,6 +15,12 @@ import type {
 import getTickets from '#app/utils/suggestions.server/get-tickets.js'
 import { createToastHeaders } from '#app/utils/toast.server.js'
 import { ticket } from '#db/schema/ticket.js'
+import { getFormProps, getInputProps, useForm } from '@conform-to/react'
+import { getZodConstraint, parseWithZod } from '@conform-to/zod'
+import { invariantResponse } from '@epic-web/invariant'
+import { useEffect, useRef, useState } from 'react'
+import { data, useFetcher } from 'react-router'
+import { z } from 'zod'
 import type { Route } from './+types/prd-personas'
 
 const schema = z.object({
@@ -245,7 +245,6 @@ export function TicketsSection({
 							item={ticket}
 							key={ticket.id}
 							model={model}
-							prdId={prdId}
 							linkToDetails
 						/>
 					) : (

@@ -1,5 +1,3 @@
-import { invariant } from '@epic-web/invariant'
-import { z } from 'zod'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
@@ -7,10 +5,11 @@ import type { ExistingSummary } from '#app/utils/types'
 import type { TenantUser } from '#app/utils/user'
 import { tenant } from '#db/schema/base.js'
 import { summary } from '#db/schema/summary'
+import { invariant } from '@epic-web/invariant'
+import { z } from 'zod'
 import { getAcceptedOrAll } from '../modelUtils'
 
 export default async function getSummary({
-	moreSuggestions = 0,
 	prdId,
 	user,
 	force = false,
@@ -20,7 +19,7 @@ export default async function getSummary({
 	user: TenantUser
 	force?: boolean
 }): Promise<ExistingSummary> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})

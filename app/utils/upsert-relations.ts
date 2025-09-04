@@ -4,7 +4,7 @@ import { models } from './models'
 
 export async function upsertRelations(
 	tenantId: string,
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: misc
 	tx: any,
 	relationSchema: PgTable,
 	leftModelName: keyof typeof models,

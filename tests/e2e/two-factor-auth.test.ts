@@ -1,5 +1,5 @@
-import { fakerEN } from '@faker-js/faker'
 import { expect, test } from '#tests/playwright-utils'
+import { fakerEN } from '@faker-js/faker'
 
 test('enable and disable 2FA', async ({ insertNewUser, page }) => {
 	const password = fakerEN.internet.password()
@@ -119,7 +119,6 @@ test('recovery options for 2FA', async ({ insertNewUser, page }) => {
 
 test('remember 2FA verification for trusted devices', async ({
 	insertNewUser,
-	page,
 }) => {
 	// This tests the "remember this device" feature that many 2FA systems have
 

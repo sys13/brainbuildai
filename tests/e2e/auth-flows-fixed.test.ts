@@ -1,10 +1,10 @@
-import { fakerEN } from '@faker-js/faker'
-import { eq } from 'drizzle-orm'
 import { db } from '#app/utils/db.server'
 import { invariant } from '#app/utils/misc'
 import { user } from '#db/schema/base'
 import { readEmail } from '#tests/mocks/utils'
 import { test as base, createUser, expect } from '#tests/playwright-utils'
+import { fakerEN } from '@faker-js/faker'
+import { eq } from 'drizzle-orm'
 
 const URL_REGEX = /(?<url>https?:\/\/[^\s$.?#].\S*)/
 const CODE_REGEX = /Here's your verification code: (?<code>\w+)/
@@ -21,7 +21,6 @@ const test = base.extend<{
 		username: string
 	}
 }>({
-	// biome-ignore lint/correctness/noEmptyPattern: <explanation>
 	getOnboardingData: async ({}, use) => {
 		const userData = createUser()
 		await use(() => {

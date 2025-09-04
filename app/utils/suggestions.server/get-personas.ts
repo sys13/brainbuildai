@@ -1,12 +1,12 @@
-import { invariant } from '@epic-web/invariant'
-import { and, eq } from 'drizzle-orm'
-import { z } from 'zod'
 import type { PersonasProps } from '#app/components/prd/prd-section.js'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import { getOpenAIStructuredOutputs } from '#app/utils/open-ai-mock'
 import type { TenantUser } from '#app/utils/user'
 import { persona } from '#db/schema/persona'
+import { invariant } from '@epic-web/invariant'
+import { and, eq } from 'drizzle-orm'
+import { z } from 'zod'
 
 export default async function getPersonas({
 	moreSuggestions = 0,
@@ -19,7 +19,7 @@ export default async function getPersonas({
 	user: TenantUser
 	regenerate?: boolean
 }): Promise<PersonasProps> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})

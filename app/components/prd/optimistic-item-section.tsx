@@ -1,10 +1,10 @@
 // components/prd/OptimisticItemSection.tsx
 
+import { cn } from '#app/lib/utils.js'
+import type { ExistingAndSuggestedClient } from '#app/utils/sort-objs.js'
 import { useEffect, useState } from 'react'
 import { useFetcher } from 'react-router'
 import { useDebounceSubmit } from 'remix-utils/use-debounce-submit'
-import { cn } from '#app/lib/utils.js'
-import type { ExistingAndSuggestedClient } from '#app/utils/sort-objs.js'
 import type { models } from '../../utils/models'
 import { ListViewItem } from '../list-view-input'
 import { SuggestedItem } from '../suggested-item'
@@ -168,7 +168,6 @@ export function OptimisticItemSection({
 							item={item}
 							badgeText={item.badgeText}
 							model={model}
-							prdId={prdId}
 							linkToDetails
 							onRename={handleRename}
 							onDelete={handleDelete}

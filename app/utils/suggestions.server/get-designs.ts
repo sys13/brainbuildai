@@ -1,8 +1,8 @@
-import { invariant } from '@epic-web/invariant'
 import { db } from '#app/utils/db.server'
 import getPermission from '#app/utils/get-permission.js'
 import type { DesignImageClient, DesignLinkClient } from '#app/utils/sort-objs'
 import type { TenantUser } from '#app/utils/user'
+import { invariant } from '@epic-web/invariant'
 
 export async function getDesigns({
 	prdId,
@@ -14,7 +14,7 @@ export async function getDesigns({
 	links: DesignLinkClient[]
 	images: DesignImageClient[]
 }> {
-	const { tenantId, isReader, isCommenter, isEditor } = await getPermission({
+	const { tenantId, isReader } = await getPermission({
 		id: prdId,
 		user,
 	})

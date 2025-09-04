@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { detectSpam } from '#app/utils/spam-detection.server'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 describe('detectSpam', () => {
 	beforeEach(() => {
@@ -70,7 +70,6 @@ describe('detectSpam', () => {
 
 	it('should handle production without MOCK_AI', async () => {
 		// Test that the function gracefully handles production environment
-		// biome-ignore lint/performance/noDelete: <explanation>
 		delete process.env.MOCK_AI
 
 		const result = await detectSpam({

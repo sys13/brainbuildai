@@ -1,11 +1,11 @@
+import { Button } from '#app/components/ui/button'
+import type { ContextFileClient, ExistingClient } from '#app/utils/sort-objs.js'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import * as Dialog from '@radix-ui/react-dialog'
 import React, { Suspense, useRef, useState } from 'react'
 import { Await, useFetcher } from 'react-router'
 import { z } from 'zod'
-import { Button } from '#app/components/ui/button'
-import type { ContextFileClient, ExistingClient } from '#app/utils/sort-objs.js'
 import { RichTextField, TextareaField } from './forms'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Input } from './ui/input'
@@ -96,7 +96,6 @@ type InnerProps = {
 
 function InnerModalContent({
 	context,
-	files,
 	prdId,
 	autoAccept,
 	onClose,

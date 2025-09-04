@@ -1,3 +1,5 @@
+import { createTenant } from '#app/models/tenant.server'
+import { user } from '#db/schema/base'
 import { GoogleStrategy } from '@coji/remix-auth-google'
 import bcrypt from 'bcryptjs'
 import { eq } from 'drizzle-orm'
@@ -7,8 +9,6 @@ import { Authenticator } from 'remix-auth'
 import { GitHubStrategy } from 'remix-auth-github'
 import { safeRedirect } from 'remix-utils/safe-redirect'
 import { z } from 'zod'
-import { createTenant } from '#app/models/tenant.server'
-import { user } from '#db/schema/base'
 import {
 	password as passwordSchema,
 	session,
@@ -71,7 +71,7 @@ authenticator.use(
 			redirectURI: `${process.env.REDIRECT_BASE_URL}/auth/github/callback`,
 			scopes: ['read:user', 'user:email'], // optional
 		},
-		async ({ tokens, request }) => {
+		async ({ tokens }) => {
 			const response = await fetch('https://api.github.com/user', {
 				headers: {
 					Accept: 'application/vnd.github+json',

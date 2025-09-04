@@ -1,9 +1,3 @@
-import { type FieldMetadata, getFormProps, useForm } from '@conform-to/react'
-import { getZodConstraint, parseWithZod } from '@conform-to/zod'
-import React, { useState } from 'react'
-import { Form, useActionData } from 'react-router'
-import { useDebounceSubmit } from 'remix-utils/use-debounce-submit'
-import { z } from 'zod'
 import { ComboConform } from '#app/components/inputs/combo-conform.js'
 import type { PrdPersonaProps } from '#app/components/prd/prd-section'
 import { Button } from '#app/components/ui/button'
@@ -12,6 +6,12 @@ import { Input } from '#app/components/ui/input'
 import { requireInternalUser } from '#app/utils/auth.server'
 import { models } from '#app/utils/models'
 import type { ExistingAndSuggestedClient } from '#app/utils/sort-objs'
+import { type FieldMetadata, getFormProps, useForm } from '@conform-to/react'
+import { getZodConstraint, parseWithZod } from '@conform-to/zod'
+import React, { useState } from 'react'
+import { Form, useActionData } from 'react-router'
+import { useDebounceSubmit } from 'remix-utils/use-debounce-submit'
+import { z } from 'zod'
 import type { Route } from './+types/prd-personas'
 
 const schema = z.object({
@@ -21,7 +21,7 @@ const schema = z.object({
 const _model = models.prdPersona
 
 export async function action({ request }: Route.ActionArgs) {
-	const { tenantId } = await requireInternalUser(request)
+	await requireInternalUser(request)
 	const formData = await request.formData()
 	const result = parseWithZod(formData, { schema })
 
@@ -29,7 +29,7 @@ export async function action({ request }: Route.ActionArgs) {
 		return result.reply()
 	}
 
-	const { prdId } = result.value
+	// const { prdId } = result.value
 
 	return result.reply()
 }

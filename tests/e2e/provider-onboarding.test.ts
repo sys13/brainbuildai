@@ -1,7 +1,7 @@
-import { eq } from 'drizzle-orm'
 import { db } from '#app/utils/db.server'
 import { user } from '#db/schema/base'
 import { test as base, createUser, expect } from '#tests/playwright-utils'
+import { eq } from 'drizzle-orm'
 
 const test = base.extend<{
 	getOnboardingData(): {
@@ -10,7 +10,6 @@ const test = base.extend<{
 		username: string
 	}
 }>({
-	// biome-ignore lint/correctness/noEmptyPattern: <explanation>
 	getOnboardingData: async ({}, use) => {
 		const userData = createUser()
 		await use(() => userData)
